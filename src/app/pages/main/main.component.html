@@ -1,0 +1,25 @@
+<div class="main-container">
+  <div class="session-badge" *ngIf="auth.isLoggedIn()">🔒 Sesión iniciada</div>
+  <h1>Bienvenido a La Grada</h1>
+  <div class="content">
+    <p>Esta es la página principal de la aplicación.</p>
+    <button routerLink="/login" class="login-btn">Ir a Login</button>
+  </div>
+
+  <div *ngIf="loading">Cargando equipos...</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+  <div class="equipos-grid">
+    <div class="equipo-card" *ngFor="let equipo of equipos">
+      <div class="card-fondo">
+        <img *ngIf="equipo.fondoUrl" [src]="equipo.fondoUrl" alt="Fondo estadio" class="fondo-blur" />
+      </div>
+      <div class="card-nombre-escudo">
+        <div class="card-nombre">
+          <span class="equipo-nombre">{{ equipo.nombre }}</span>
+        </div>
+        <img class="equipo-escudo" *ngIf="equipo.escudoUrl" [src]="equipo.escudoUrl" [alt]="equipo.nombre + ' escudo'" />
+      </div>
+    </div>
+  </div>
+</div>

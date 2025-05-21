@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="navbar-left"></div>
+  <div class="navbar-center">
+    <img src="assets/logo-lagrada.png" alt="La Grada Logo" class="logo" />
+  </div>
+  <div class="navbar-right">
+    <button class="menu-btn" (click)="toggleMenu()">menu</button>
+  </div>
+</nav>
+
+<div class="menu-overlay" [class.open]="menuOpen">
+  <div class="menu-content">
+    <button class="close-btn" (click)="toggleMenu()">✕</button>
+    <ul>
+      <li><a routerLink="/main" (click)="toggleMenu()">Inicio</a></li>
+      <li><a routerLink="/login" (click)="toggleMenu()">Login</a></li>
+      <li><a routerLink="/register" (click)="toggleMenu()">Registro</a></li>
+      <li><a routerLink="/activate-account" (click)="toggleMenu()">Activar cuenta</a></li>
+      <li><a href="#">Opción de ejemplo</a></li>
+    </ul>
+  </div>
+</div>

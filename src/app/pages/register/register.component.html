@@ -1,0 +1,33 @@
+<div class="register-container">
+  <h2>Registro</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="correo">Correo</label>
+      <input type="email" id="correo" name="correo" [(ngModel)]="correo" required />
+    </div>
+    <div class="form-group">
+      <label for="username">Usuario</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required />
+    </div>
+    <div class="form-group">
+      <label for="verifyPassword">Repetir Contraseña</label>
+      <input type="password" id="verifyPassword" name="verifyPassword" [(ngModel)]="verifyPassword" required />
+    </div>
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" required />
+    </div>
+    <div class="form-group">
+      <label for="apellidos">Apellidos</label>
+      <input type="text" id="apellidos" name="apellidos" [(ngModel)]="apellidos" required />
+    </div>
+    <button type="submit" [disabled]="loading">Registrarse</button>
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+    <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+  </form>
+  <button class="login-btn" (click)="goToLogin()">¿Ya tienes cuenta? Inicia sesión</button>
+</div>
