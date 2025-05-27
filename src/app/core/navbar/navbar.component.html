@@ -17,6 +17,9 @@
       <li><a routerLink="/register" (click)="toggleMenu()">Registro</a></li>
       <li><a routerLink="/activate-account" (click)="toggleMenu()">Activar cuenta</a></li>
       <li><a href="#">Opción de ejemplo</a></li>
+      <li *ngIf="isLoggedIn()">
+        <button class="logout-btn" (click)="logout()">Logout</button>
+      </li>
     </ul>
   </div>
 </div>

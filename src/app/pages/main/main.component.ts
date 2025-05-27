@@ -38,12 +38,22 @@ export class MainComponent implements OnInit {
     if (!token) return;
     this.equipos.forEach((equipo, idx) => {
       // Escudo
-      this.equipoService.downloadImage(equipo.fotoEscudo, token).subscribe(blob => {
-        this.equipos[idx].escudoUrl = URL.createObjectURL(blob);
+      this.equipoService.downloadImage(equipo.fotoEscudo, token).subscribe({
+        next: (blob) => {
+          this.equipos[idx].escudoUrl = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.equipos[idx].escudoUrl = undefined;
+        }
       });
       // Fondo
-      this.equipoService.downloadImage(equipo.fotoFondo, token).subscribe(blob => {
-        this.equipos[idx].fondoUrl = URL.createObjectURL(blob);
+      this.equipoService.downloadImage(equipo.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.equipos[idx].fondoUrl = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.equipos[idx].fondoUrl = undefined;
+        }
       });
     });
   }

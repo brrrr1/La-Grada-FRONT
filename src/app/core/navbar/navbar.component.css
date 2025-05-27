@@ -99,6 +99,22 @@
   color: #fff200;
 }
 
+.logout-btn {
+  background: none;
+  border: none;
+  color: #fff475;
+  font-size: 2rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  margin-top: 1rem;
+  transition: color 0.2s;
+}
+.logout-btn:hover {
+  color: #ff5252;
+}
+
 @media (max-width: 600px) {
   .logo {
     height: 36px;

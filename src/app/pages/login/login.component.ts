@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,13 @@ export class LoginComponent {
   errorMsg = '';
   loading = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+      if (params['sessionExpired']) {
+        this.errorMsg = 'Tu sesión ha expirado. Por favor, inicia sesión de nuevo.';
+      }
+    });
+  }
 
   onSubmit() {
     this.errorMsg = '';
