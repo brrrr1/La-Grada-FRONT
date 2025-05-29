@@ -12,6 +12,8 @@ interface EquipoCard extends Equipo {
 interface EventoCard extends Evento {
   escudo1Url?: string;
   escudo2Url?: string;
+  fondo1Url?: string;
+  fondo2Url?: string;
 }
 
 const BASE_URL = 'http://localhost:8080';
@@ -24,10 +26,13 @@ const BASE_URL = 'http://localhost:8080';
 export class MainComponent implements OnInit {
   equipos: EquipoCard[] = [];
   eventos: EventoCard[] = [];
+  eventosFuturos: EventoCard[] = [];
   loading = true;
   loadingEventos = true;
+  loadingEventosFuturos = false;
   errorMsg = '';
   errorEventos = '';
+  errorEventosFuturos = '';
   userName: string | null = null;
 
   constructor(
@@ -61,13 +66,12 @@ export class MainComponent implements OnInit {
       }
     });
     this.loadUserName();
+    this.loadEventosFuturos();
   }
 
   loadImages() {
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.equipos.forEach((equipo, idx) => {
-      // Escudo
       this.equipoService.downloadImage(equipo.fotoEscudo, token).subscribe({
         next: (blob) => {
           this.equipos[idx].escudoUrl = URL.createObjectURL(blob);
@@ -76,7 +80,6 @@ export class MainComponent implements OnInit {
           this.equipos[idx].escudoUrl = undefined;
         }
       });
-      // Fondo
       this.equipoService.downloadImage(equipo.fotoFondo, token).subscribe({
         next: (blob) => {
           this.equipos[idx].fondoUrl = URL.createObjectURL(blob);
@@ -89,10 +92,8 @@ export class MainComponent implements OnInit {
   }
 
   loadEventoEscudos() {
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.eventos.forEach((evento, idx) => {
-      // Escudo equipo1
       this.equipoService.downloadImage(evento.equipo1.fotoEscudo, token).subscribe({
         next: (blob) => {
           this.eventos[idx].escudo1Url = URL.createObjectURL(blob);
@@ -101,13 +102,28 @@ export class MainComponent implements OnInit {
           this.eventos[idx].escudo1Url = undefined;
         }
       });
-      // Escudo equipo2
       this.equipoService.downloadImage(evento.equipo2.fotoEscudo, token).subscribe({
         next: (blob) => {
           this.eventos[idx].escudo2Url = URL.createObjectURL(blob);
         },
         error: () => {
           this.eventos[idx].escudo2Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo1.fotoFondo, token).subscribe({
+        next: (blob) => {
+          (this.eventos[idx] as any).fondo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          (this.eventos[idx] as any).fondo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoFondo, token).subscribe({
+        next: (blob) => {
+          (this.eventos[idx] as any).fondo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          (this.eventos[idx] as any).fondo2Url = undefined;
         }
       });
     });
@@ -126,6 +142,63 @@ export class MainComponent implements OnInit {
       error: () => {
         this.userName = null;
       }
+    });
+  }
+
+  loadEventosFuturos() {
+    if (!this.auth.isLoggedIn()) return;
+    this.loadingEventosFuturos = true;
+    this.errorEventosFuturos = '';
+    const token = this.auth.getToken();
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    this.http.get<EventoCard[]>(`${BASE_URL}/eventos-futuros`, { headers }).subscribe({
+      next: (data) => {
+        this.eventosFuturos = data;
+        this.loadEscudosEventosFuturos();
+        this.loadingEventosFuturos = false;
+      },
+      error: () => {
+        this.errorEventosFuturos = 'Error al cargar tus próximos eventos';
+        this.loadingEventosFuturos = false;
+      }
+    });
+  }
+
+  loadEscudosEventosFuturos() {
+    const token = this.auth.getToken() || undefined;
+    this.eventosFuturos.forEach((evento, idx) => {
+      this.equipoService.downloadImage(evento.equipo1.fotoEscudo, token).subscribe({
+        next: (blob) => {
+          this.eventosFuturos[idx].escudo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosFuturos[idx].escudo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoEscudo, token).subscribe({
+        next: (blob) => {
+          this.eventosFuturos[idx].escudo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosFuturos[idx].escudo2Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo1.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventosFuturos[idx].fondo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosFuturos[idx].fondo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventosFuturos[idx].fondo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosFuturos[idx].fondo2Url = undefined;
+        }
+      });
     });
   }
 }

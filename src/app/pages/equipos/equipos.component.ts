@@ -35,8 +35,7 @@ export class EquiposComponent implements OnInit {
   }
 
   loadImages() {
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.equipos.forEach((equipo, idx) => {
       this.equipoService.downloadImage(equipo.fotoEscudo, token).subscribe({
         next: (blob) => {

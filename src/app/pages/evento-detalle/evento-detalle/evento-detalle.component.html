@@ -25,7 +25,7 @@
     <div class="entradas-restantes">
       Entradas restantes: <b>{{ evento.entradasRestantes }}</b>
     </div>
-    <button class="btn-comprar" [disabled]="yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="comprarEntrada()">
+    <button class="btn-comprar" [disabled]="!isLoggedIn || yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="comprarEntrada()">
       <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
       <ng-container *ngIf="evento.entradasRestantes > 0">{{ yaTieneEntrada ? 'Ya tienes entrada' : (comprando ? 'Comprando...' : 'Comprar entrada') }}</ng-container>
     </button>

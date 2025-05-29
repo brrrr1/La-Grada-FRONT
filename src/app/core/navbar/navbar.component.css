@@ -8,35 +8,52 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  background: transparent;
+  background: rgba(30, 30, 30, 0.22);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   padding: 0 2rem;
   box-sizing: border-box;
+  overflow: visible;
+  padding-bottom: 10px;
 }
 
 .navbar-center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  position: static;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
 }
 
 .logo {
-  height: 48px;
+  height: 128px;
   width: auto;
   display: block;
+  margin: 0 auto;
 }
 
 .menu-btn {
   background: none;
   border: none;
   color: #fff475;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-family: inherit;
   cursor: pointer;
   text-transform: lowercase;
   font-weight: 700;
   letter-spacing: 1px;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  line-height: 70px;
+  text-decoration: none;
 }
 .menu-btn:hover {
   color: #fff200;
@@ -124,10 +141,13 @@
   cursor: pointer;
   text-decoration: underline;
   font-weight: 700;
-  margin-top: 0.5rem;
+  margin-top: 0;
   margin-left: 0.2rem;
   margin-right: 0.2rem;
   transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  height: 70px;
 }
 .login-navbar-btn:hover {
   color: #fff200;
@@ -135,11 +155,14 @@
 .user-navbar-name {
   cursor: default;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 70px;
 }
 
 @media (max-width: 600px) {
   .logo {
-    height: 36px;
+    height: 90px;
   }
   .menu-content a {
     font-size: 1.5rem;
@@ -148,4 +171,36 @@
 
 body {
   padding-top: 70px;
+}
+
+/* Fade oscuro extra para mejorar contraste */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(30,30,30,0.38) 0%, rgba(30,30,30,0.12) 100%);
+  z-index: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Fade-out inferior para transición suave */
+.navbar::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -18px; height: 18px;
+  background: linear-gradient(180deg, rgba(30,30,30,0.18) 0%, rgba(30,30,30,0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.navbar > * {
+  position: relative;
+  z-index: 2;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }

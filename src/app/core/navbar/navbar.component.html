@@ -8,10 +8,12 @@
     </ng-template>
   </div>
   <div class="navbar-center">
-    <img src="assets/logo-lagrada.png" alt="La Grada Logo" class="logo" />
+    <a routerLink="/main">
+      <img src="assets/logo-lagrada.png" alt="La Grada Logo" class="logo" />
+    </a>
   </div>
   <div class="navbar-right">
-    <button class="menu-btn" (click)="toggleMenu()">menu</button>
+    <button class="menu-btn" (click)="toggleMenu()">&#9776;</button>
   </div>
 </nav>
 

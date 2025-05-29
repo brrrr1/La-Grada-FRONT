@@ -7,6 +7,8 @@ import { EventoService, Evento } from '../../../services/evento.service';
 interface EventoCard extends Evento {
   escudo1Url?: string;
   escudo2Url?: string;
+  fondo1Url?: string;
+  fondo2Url?: string;
 }
 
 @Component({
@@ -54,8 +56,7 @@ export class EquipoDetalleComponent implements OnInit {
 
   loadImages() {
     if (!this.equipo) return;
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.equipoService.downloadImage(this.equipo.fotoEscudo, token).subscribe({
       next: (blob) => {
         this.escudoUrl = URL.createObjectURL(blob);
@@ -92,10 +93,8 @@ export class EquipoDetalleComponent implements OnInit {
   }
 
   loadEventoEscudos() {
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.eventos.forEach((evento, idx) => {
-      // Escudo equipo1
       this.equipoService.downloadImage(evento.equipo1.fotoEscudo, token).subscribe({
         next: (blob) => {
           this.eventos[idx].escudo1Url = URL.createObjectURL(blob);
@@ -104,13 +103,28 @@ export class EquipoDetalleComponent implements OnInit {
           this.eventos[idx].escudo1Url = undefined;
         }
       });
-      // Escudo equipo2
       this.equipoService.downloadImage(evento.equipo2.fotoEscudo, token).subscribe({
         next: (blob) => {
           this.eventos[idx].escudo2Url = URL.createObjectURL(blob);
         },
         error: () => {
           this.eventos[idx].escudo2Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo1.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventos[idx].fondo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventos[idx].fondo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventos[idx].fondo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventos[idx].fondo2Url = undefined;
         }
       });
     });

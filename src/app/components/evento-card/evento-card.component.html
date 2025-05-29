@@ -1,4 +1,8 @@
 <div class="evento-card" (click)="irADetalle()">
+  <div class="evento-card-bg">
+    <div class="evento-card-bg-half left" [ngStyle]="{ 'background-image': 'url(' + evento.fondo1Url + ')' }"></div>
+    <div class="evento-card-bg-half right" [ngStyle]="{ 'background-image': 'url(' + evento.fondo2Url + ')' }"></div>
+  </div>
   <div class="evento-nombre">{{ evento.nombre }}</div>
   <div class="evento-escudos">
     <img *ngIf="evento.escudo1Url" [src]="evento.escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="evento-escudo" />

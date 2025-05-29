@@ -21,11 +21,14 @@ export class EquipoService {
     return this.http.get<Equipo[]>(`${BASE_URL}/equipo/`);
   }
 
-  downloadImage(filename: string, token: string): Observable<Blob> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-    return this.http.get(`${BASE_URL}/download/${filename}`, { headers, responseType: 'blob' });
+  downloadImage(filename: string, token?: string): Observable<Blob> {
+    let options: any = { responseType: 'blob' as const };
+    if (token) {
+      options.headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+    }
+    return this.http.get(`${BASE_URL}/download/${filename}`, options) as unknown as Observable<Blob>;
   }
 
   getEquipoById(id: string): Observable<Equipo> {

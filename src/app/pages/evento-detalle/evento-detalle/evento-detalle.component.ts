@@ -53,8 +53,7 @@ export class EventoDetalleComponent implements OnInit {
 
   cargarImagenes() {
     if (!this.evento) return;
-    const token = this.auth.getToken();
-    if (!token) return;
+    const token = this.auth.getToken() || undefined;
     this.equipoService.downloadImage(this.evento.equipo1.fotoEscudo, token).subscribe({
       next: (blob) => {
         this.escudo1Url = URL.createObjectURL(blob);
@@ -123,5 +122,9 @@ export class EventoDetalleComponent implements OnInit {
         this.comprando = false;
       }
     });
+  }
+
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn();
   }
 }

@@ -1,7 +1,7 @@
 .evento-card {
   flex: 0 0 340px;
   width: 340px;
-  background: rgba(255,255,255,0.95);
+  background: none;
   border-radius: 12px;
   box-shadow: 0 6px 32px rgba(0,0,0,0.10);
   padding: 0.2rem 1.2rem;
@@ -14,10 +14,44 @@
   position: relative;
   justify-content: center;
   box-sizing: border-box;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.evento-card-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 0;
+}
+
+.evento-card-bg-half {
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.evento-card-bg-half.left {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.evento-card-bg-half.right {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.evento-nombre, .evento-escudos {
+  position: relative;
+  z-index: 1;
 }
 
 .evento-nombre {
-  color: #222;
+  color: #fff;
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 1.2rem;
@@ -38,7 +72,7 @@
 }
 
 .evento-vs {
-  color: #3f51b5;
+  color: #fff;
   font-size: 1.5rem;
   font-weight: 800;
   margin: 0 0.5rem;
