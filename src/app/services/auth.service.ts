@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -64,5 +65,16 @@ export class AuthService {
 
   activateAccount(token: string): Observable<any> {
     return this.http.post(`${BASE_URL}/activate/account`, { token });
+  }
+
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+    try {
+      const decoded: any = jwtDecode(token);
+      return decoded.sub || decoded.id || decoded.userId || null;
+    } catch {
+      return null;
+    }
   }
 }

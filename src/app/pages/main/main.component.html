@@ -1,20 +1,10 @@
 <div class="main-container">
-  <h2 class="equipos-title">Equipos</h2>
+  <h2 class="equipos-title"><a routerLink="/equipos" style="color:inherit;text-decoration:none;cursor:pointer;">Equipos</a></h2>
   <div *ngIf="loading">Cargando equipos...</div>
   <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 
   <div class="equipos-grid">
-    <div class="equipo-card" *ngFor="let equipo of equipos">
-      <div class="card-fondo">
-        <img *ngIf="equipo.fondoUrl" [src]="equipo.fondoUrl" alt="Fondo estadio" class="fondo-blur" />
-      </div>
-      <div class="card-nombre-escudo">
-        <div class="card-nombre">
-          <span class="equipo-nombre">{{ equipo.nombre }}</span>
-        </div>
-        <img class="equipo-escudo" *ngIf="equipo.escudoUrl" [src]="equipo.escudoUrl" [alt]="equipo.nombre + ' escudo'" />
-      </div>
-    </div>
+    <app-equipo-card *ngFor="let equipo of equipos" [equipo]="equipo"></app-equipo-card>
   </div>
 
   <h2 class="eventos-title">Eventos</h2>
@@ -22,13 +12,6 @@
   <div *ngIf="errorEventos" class="error">{{ errorEventos }}</div>
 
   <div class="eventos-grid">
-    <div class="evento-card" *ngFor="let evento of eventos">
-      <div class="evento-nombre">{{ evento.nombre }}</div>
-      <div class="evento-escudos">
-        <img *ngIf="evento.escudo1Url" [src]="evento.escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="evento-escudo" />
-        <span class="evento-vs">vs</span>
-        <img *ngIf="evento.escudo2Url" [src]="evento.escudo2Url" [alt]="evento.equipo2.nombre + ' escudo'" class="evento-escudo" />
-      </div>
-    </div>
+    <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
   </div>
 </div>

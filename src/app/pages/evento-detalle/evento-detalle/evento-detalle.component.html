@@ -1,0 +1,34 @@
+<div *ngIf="cargando" class="evento-loader">Cargando evento...</div>
+<div *ngIf="error" class="evento-error">{{ error }}</div>
+<div *ngIf="evento && !cargando && !error" class="evento-detalle">
+  <div class="evento-banner">
+    <div class="banner-mitad banner-mitad-izq" [ngStyle]="{ 'background-image': fondo1Url ? 'url(' + fondo1Url + ')' : 'none' }">
+      <div class="banner-escudo-nombre">
+        <img *ngIf="escudo1Url" [src]="escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="banner-escudo" />
+        <div class="banner-nombre">{{ evento.equipo1.nombre }}</div>
+      </div>
+    </div>
+    <div class="banner-centro">
+      <div class="banner-titulo">{{ evento.nombre }}</div>
+    </div>
+    <div class="banner-mitad banner-mitad-der" [ngStyle]="{ 'background-image': fondo2Url ? 'url(' + fondo2Url + ')' : 'none' }">
+      <div class="banner-escudo-nombre">
+        <img *ngIf="escudo2Url" [src]="escudo2Url" [alt]="evento.equipo2.nombre + ' escudo'" class="banner-escudo" />
+        <div class="banner-nombre">{{ evento.equipo2.nombre }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="evento-descripcion">
+    {{ evento.descripcion }}
+  </div>
+  <div class="evento-entradas">
+    <div class="entradas-restantes">
+      Entradas restantes: <b>{{ evento.entradasRestantes }}</b>
+    </div>
+    <button class="btn-comprar" [disabled]="yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="comprarEntrada()">
+      <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
+      <ng-container *ngIf="evento.entradasRestantes > 0">{{ yaTieneEntrada ? 'Ya tienes entrada' : (comprando ? 'Comprando...' : 'Comprar entrada') }}</ng-container>
+    </button>
+    <div *ngIf="compraMsg" class="compra-msg">{{ compraMsg }}</div>
+  </div>
+</div>

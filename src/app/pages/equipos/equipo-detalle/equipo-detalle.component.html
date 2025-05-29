@@ -1,0 +1,27 @@
+<div class="equipo-detalle-container" *ngIf="!loading && equipo; else loadingOrError">
+  <div class="banner-fondo" *ngIf="fondoUrl">
+    <img [src]="fondoUrl" alt="Fondo estadio" class="banner-img" />
+  </div>
+  <div class="equipo-detalle-content">
+    <div class="escudo-col">
+      <img *ngIf="escudoUrl" [src]="escudoUrl" [alt]="equipo?.nombre + ' escudo'" class="escudo-grande" />
+    </div>
+    <div class="info-col">
+      <h2 class="nombre-equipo">{{ equipo?.nombre }}</h2>
+      <!-- Aquí puedes agregar más detalles si los hay -->
+    </div>
+  </div>
+  <div class="proximos-eventos">
+    <h3>Próximos eventos</h3>
+    <div *ngIf="eventosLoading">Cargando eventos...</div>
+    <div *ngIf="eventosError" class="error">{{ eventosError }}</div>
+    <div *ngIf="!eventosLoading && !eventosError && eventos.length === 0">No hay próximos eventos.</div>
+    <div class="eventos-list" *ngIf="eventos.length > 0">
+      <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
+    </div>
+  </div>
+</div>
+<ng-template #loadingOrError>
+  <div *ngIf="loading">Cargando equipo...</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+</ng-template>

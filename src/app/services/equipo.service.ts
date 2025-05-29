@@ -27,4 +27,8 @@ export class EquipoService {
     });
     return this.http.get(`${BASE_URL}/download/${filename}`, { headers, responseType: 'blob' });
   }
+
+  getEquipoById(id: string): Observable<Equipo> {
+    return this.http.get<Equipo>(`${BASE_URL}/equipo/${id}`);
+  }
 }
