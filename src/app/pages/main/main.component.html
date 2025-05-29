@@ -1,11 +1,5 @@
 <div class="main-container">
-  <div class="session-badge" *ngIf="auth.isLoggedIn()">🔒 Sesión iniciada</div>
-  <h1>Bienvenido a La Grada</h1>
-  <div class="content">
-    <p>Esta es la página principal de la aplicación.</p>
-    <button routerLink="/login" class="login-btn">Ir a Login</button>
-  </div>
-
+  <h2 class="equipos-title">Equipos</h2>
   <div *ngIf="loading">Cargando equipos...</div>
   <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 
@@ -19,6 +13,21 @@
           <span class="equipo-nombre">{{ equipo.nombre }}</span>
         </div>
         <img class="equipo-escudo" *ngIf="equipo.escudoUrl" [src]="equipo.escudoUrl" [alt]="equipo.nombre + ' escudo'" />
+      </div>
+    </div>
+  </div>
+
+  <h2 class="eventos-title">Eventos</h2>
+  <div *ngIf="loadingEventos">Cargando eventos...</div>
+  <div *ngIf="errorEventos" class="error">{{ errorEventos }}</div>
+
+  <div class="eventos-grid">
+    <div class="evento-card" *ngFor="let evento of eventos">
+      <div class="evento-nombre">{{ evento.nombre }}</div>
+      <div class="evento-escudos">
+        <img *ngIf="evento.escudo1Url" [src]="evento.escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="evento-escudo" />
+        <span class="evento-vs">vs</span>
+        <img *ngIf="evento.escudo2Url" [src]="evento.escudo2Url" [alt]="evento.equipo2.nombre + ' escudo'" class="evento-escudo" />
       </div>
     </div>
   </div>

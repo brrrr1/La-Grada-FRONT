@@ -1,5 +1,12 @@
 <nav class="navbar">
-  <div class="navbar-left"></div>
+  <div class="navbar-left">
+    <ng-container *ngIf="!isLoggedIn(); else userNameBlock">
+      <button class="login-navbar-btn" (click)="goToLogin()">Iniciar sesión</button>
+    </ng-container>
+    <ng-template #userNameBlock>
+      <span class="user-navbar-name">👤 {{ userName }}</span>
+    </ng-template>
+  </div>
   <div class="navbar-center">
     <img src="assets/logo-lagrada.png" alt="La Grada Logo" class="logo" />
   </div>

@@ -115,6 +115,28 @@
   color: #ff5252;
 }
 
+.login-navbar-btn, .user-navbar-name {
+  background: none;
+  border: none;
+  color: #fff475;
+  font-size: 1.1rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  transition: color 0.2s;
+}
+.login-navbar-btn:hover {
+  color: #fff200;
+}
+.user-navbar-name {
+  cursor: default;
+  text-decoration: none;
+}
+
 @media (max-width: 600px) {
   .logo {
     height: 36px;

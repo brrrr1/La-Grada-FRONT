@@ -2,6 +2,7 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 3.5rem;
 }
 
 h1 {
@@ -44,30 +45,38 @@ h1 {
   box-shadow: 0 2px 6px rgba(56,142,60,0.08);
 }
 
+.equipos-title {
+  color: #fff475;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-left: 0.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
 .equipos-grid {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
-  justify-content: center;
+  flex-direction: row;
+  gap: 3.5rem 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1.5rem;
   margin-top: 2.5rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: #fff475 #7bbd8a;
 }
 
 .equipo-card {
-  width: 340px;
-  position: relative;
-  border-radius: 28px;
-  overflow: visible;
-  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
-  background: transparent;
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
+  flex: 0 0 340px;
+  margin-bottom: 0;
 }
 
 .card-fondo {
   width: 100%;
   height: 150px;
-  border-radius: 28px 28px 0 0;
+  border-radius: 12px 12px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -81,16 +90,17 @@ h1 {
 }
 
 .card-nombre-escudo {
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   background: #fff;
-  border-radius: 0 0 18px 18px;
-  min-height: 70px;
+  border-radius: 0 0 10px 10px;
+  min-height: 44px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.10);
   z-index: 2;
-  padding: 0.5rem 1.5rem;
+  padding: 0.2rem 1.2rem;
   margin-top: -4px;
+  overflow: visible;
 }
 
 .card-nombre {
@@ -98,6 +108,7 @@ h1 {
   display: flex;
   align-items: center;
   min-width: 0;
+  height: 100%;
 }
 
 .equipo-nombre {
@@ -112,15 +123,79 @@ h1 {
 
 .equipo-escudo {
   position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 16px;
+  top: -36px;
+  transform: none;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  z-index: 3;
+}
+
+.eventos-title {
+  color: #fff475;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-left: 0.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 3.5rem;
+  letter-spacing: -1px;
+}
+
+.eventos-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 3.5rem 2.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1.5rem;
+  margin-top: 2.5rem;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: #fff475 #7bbd8a;
+}
+
+.evento-card {
+  flex: 0 0 340px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 12px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+  padding: 0.2rem 1.2rem;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 180px;
+  height: 180px;
+  position: relative;
+  justify-content: center;
+}
+
+.evento-nombre {
+  color: #222;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+.evento-escudos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.evento-escudo {
   width: 80px;
   height: 80px;
   object-fit: contain;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  z-index: 3;
-  border: 4px solid #fff;
+}
+
+.evento-vs {
+  color: #3f51b5;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0 0.5rem;
 }
