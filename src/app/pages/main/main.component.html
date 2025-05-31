@@ -11,8 +11,12 @@
   <div *ngIf="loadingEventos">Cargando eventos...</div>
   <div *ngIf="errorEventos" class="error">{{ errorEventos }}</div>
 
-  <div class="eventos-grid">
-    <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
+  <div class="eventos-outer">
+    <div class="eventos-scroll">
+      <div class="eventos-grid">
+        <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
+      </div>
+    </div>
   </div>
 
   <ng-container *ngIf="auth.isLoggedIn() && eventosFuturos.length > 0">

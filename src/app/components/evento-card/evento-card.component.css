@@ -16,6 +16,7 @@
   box-sizing: border-box;
   cursor: pointer;
   overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .evento-card-bg {
@@ -76,4 +77,37 @@
   font-size: 1.5rem;
   font-weight: 800;
   margin: 0 0.5rem;
+}
+
+.evento-fondo-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px) brightness(0.7);
+  opacity: 0.5;
+  z-index: 1;
+  border-radius: 12px;
+  pointer-events: none;
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.evento-fondo-blur.left {
+  left: 0;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.evento-fondo-blur.right {
+  left: 50%;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.evento-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
 }

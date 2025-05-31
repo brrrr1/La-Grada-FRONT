@@ -2,14 +2,35 @@
 
 html, body { height: 100%; }
 body {
+  position: relative;
   min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Inter', 'Arial', sans-serif;
-  background: radial-gradient(ellipse at 60% 40%, #e6e98a 0%, #b1d18a 40%, #7bbd8a 100%);
-  /* Degradado verde-amarillo suave */
   color: #fff475;
   transition: background 0.5s;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  left: 0; right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(ellipse at 60% 40%, #e6e98a 0%, #b1d18a 40%, #7bbd8a 100%);
+  pointer-events: none;
+}
+
+body::before {
+  top: 0;
+}
+
+body::after {
+  top: 100vh;
+  transform: scaleY(-1);
 }
 
 h1, h2, h3, h4, h5, h6 {
