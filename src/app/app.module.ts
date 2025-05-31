@@ -21,6 +21,7 @@ import { EventoCardComponent } from './components/evento-card/evento-card.compon
 import { EventosListComponent } from './components/eventos-list/eventos-list.component';
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
+import { ModalComponent } from './components/modal/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/ev
     EventoCardComponent,
     EventosListComponent,
     EquipoDetalleComponent,
-    EventoDetalleComponent
+    EventoDetalleComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

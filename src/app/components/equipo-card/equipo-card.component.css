@@ -10,7 +10,6 @@
   align-items: center;
   justify-content: flex-end;
   border-radius: 10px;
-  margin: 20px;
   backdrop-filter: blur(10px);
   cursor: pointer;
   overflow: hidden;

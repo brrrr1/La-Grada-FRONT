@@ -4,7 +4,15 @@
       <button class="login-navbar-btn" (click)="goToLogin()">Iniciar sesión</button>
     </ng-container>
     <ng-template #userNameBlock>
-      <span class="user-navbar-name">👤 {{ userName }}</span>
+      <span class="user-navbar-name" (click)="toggleUserMenu()" style="cursor:pointer">{{ userName }}</span>
+      <ng-container *ngIf="userMenuOpen">
+        <span class="user-navbar-options" @userMenuAnimation>
+          <a class="user-navbar-link" (click)="goTo('/perfil')">Perfil</a>
+          <a class="user-navbar-link" (click)="goTo('/entradas')">Entradas</a>
+          <a class="user-navbar-link" (click)="goTo('/historial')">Historial</a>
+          <a class="user-navbar-link" (click)="logout()">Cerrar sesión</a>
+        </span>
+      </ng-container>
     </ng-template>
   </div>
   <div class="navbar-center">
@@ -32,3 +40,13 @@
     </ul>
   </div>
 </div>
+
+<app-modal
+  *ngIf="showLogoutModal"
+  [titulo]="'Cerrar sesión'"
+  [texto]="'¿Estás seguro de que quieres cerrar sesión?'"
+  [confirmText]="'Cerrar sesión'"
+  [cancelText]="'Atrás'"
+  (confirm)="confirmLogout()"
+  (cancel)="cancelLogout()"
+></app-modal>

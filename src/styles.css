@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', 'Arial', sans-serif;
-  color: #fff475;
+  color: #fff;
   transition: background 0.5s;
   overflow-x: hidden;
 }
@@ -20,7 +20,7 @@ body::after {
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  background: radial-gradient(ellipse at 60% 40%, #e6e98a 0%, #b1d18a 40%, #7bbd8a 100%);
+  background: radial-gradient(ellipse at 60% 40%, #243b55 0%, #141e30 100%);
   pointer-events: none;
 }
 
@@ -34,7 +34,7 @@ body::after {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #fff475;
+  color: #fff;
   font-family: 'Inter', 'Arial', sans-serif;
   font-weight: 700;
   letter-spacing: -1px;
@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 
 button, .login-btn, .register-btn {
   background: none;
-  color: #fff475;
+  color: #fff;
   border: none;
   font-size: 1.1rem;
   font-family: inherit;
@@ -57,13 +57,13 @@ button, .login-btn, .register-btn {
 }
 
 button:hover, .login-btn:hover, .register-btn:hover {
-  color: #fff200;
+  color: #fff;
 }
 
 input, select, textarea {
   background: rgba(255,255,255,0.15);
-  border: 1.5px solid #fff475;
-  color: #fff475;
+  border: 1.5px solid #fff;
+  color: #fff;
   font-size: 1.1rem;
   border-radius: 6px;
   padding: 0.5rem;
@@ -71,7 +71,7 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-  outline: 2px solid #fff475;
+  outline: 2px solid #fff;
   background: rgba(255,255,255,0.25);
 }
 

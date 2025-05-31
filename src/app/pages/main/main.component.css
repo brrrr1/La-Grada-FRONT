@@ -47,7 +47,7 @@ h1 {
 }
 
 .equipos-title {
-  color: #fff475;
+  color: #fff;
   font-size: 2.2rem;
   font-weight: 800;
   margin-left: 0.5rem;
@@ -66,7 +66,7 @@ h1 {
   justify-content: flex-start;
   flex-wrap: nowrap;
   scrollbar-width: thin;
-  scrollbar-color: #fff475 #7bbd8a;
+  scrollbar-color: #fff #141e30;
 }
 
 .equipo-card {
@@ -134,7 +134,7 @@ h1 {
 }
 
 .eventos-title {
-  color: #fff475;
+  color: #fff;
   font-size: 2.2rem;
   font-weight: 800;
   margin-left: 0.5rem;
@@ -154,7 +154,7 @@ h1 {
   justify-content: flex-start;
   flex-wrap: nowrap;
   scrollbar-width: thin;
-  scrollbar-color: #fff475 #7bbd8a;
+  scrollbar-color: #fff #141e30;
 }
 
 .evento-card {

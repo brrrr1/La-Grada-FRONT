@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Evento, EventoService } from '../../../services/evento.service';
 import { EquipoService } from '../../../services/equipo.service';
 import { AuthService } from '../../../services/auth.service';
@@ -21,12 +21,14 @@ export class EventoDetalleComponent implements OnInit {
   yaTieneEntrada = false;
   comprando = false;
   compraMsg = '';
+  showBuyModal = false;
 
   constructor(
     private route: ActivatedRoute,
     private eventoService: EventoService,
     private equipoService: EquipoService,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -124,7 +126,33 @@ export class EventoDetalleComponent implements OnInit {
     });
   }
 
+  intentarComprarEntrada() {
+    if (!this.evento || this.yaTieneEntrada || this.evento.entradasRestantes <= 0) return;
+    this.showBuyModal = true;
+  }
+
+  confirmarCompraEntrada() {
+    this.showBuyModal = false;
+    this.comprarEntrada();
+  }
+
+  cancelarCompraEntrada() {
+    this.showBuyModal = false;
+  }
+
   get isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
+  }
+
+  irADetalleEquipo1() {
+    if (this.evento) {
+      this.router.navigate(['/equipos', this.evento.equipo1.id]);
+    }
+  }
+
+  irADetalleEquipo2() {
+    if (this.evento) {
+      this.router.navigate(['/equipos', this.evento.equipo2.id]);
+    }
   }
 }

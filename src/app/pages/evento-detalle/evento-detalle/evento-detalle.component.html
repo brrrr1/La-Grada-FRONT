@@ -4,7 +4,7 @@
   <div class="evento-banner">
     <div class="banner-mitad banner-mitad-izq" [ngStyle]="{ 'background-image': fondo1Url ? 'url(' + fondo1Url + ')' : 'none' }">
       <div class="banner-escudo-nombre">
-        <img *ngIf="escudo1Url" [src]="escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="banner-escudo" />
+        <img *ngIf="escudo1Url" [src]="escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="banner-escudo" (click)="irADetalleEquipo1()" style="cursor:pointer" />
         <div class="banner-nombre">{{ evento.equipo1.nombre }}</div>
       </div>
     </div>
@@ -13,22 +13,36 @@
     </div>
     <div class="banner-mitad banner-mitad-der" [ngStyle]="{ 'background-image': fondo2Url ? 'url(' + fondo2Url + ')' : 'none' }">
       <div class="banner-escudo-nombre">
-        <img *ngIf="escudo2Url" [src]="escudo2Url" [alt]="evento.equipo2.nombre + ' escudo'" class="banner-escudo" />
+        <img *ngIf="escudo2Url" [src]="escudo2Url" [alt]="evento.equipo2.nombre + ' escudo'" class="banner-escudo" (click)="irADetalleEquipo2()" style="cursor:pointer" />
         <div class="banner-nombre">{{ evento.equipo2.nombre }}</div>
       </div>
     </div>
   </div>
-  <div class="evento-descripcion">
-    {{ evento.descripcion }}
-  </div>
-  <div class="evento-entradas">
-    <div class="entradas-restantes">
-      Entradas restantes: <b>{{ evento.entradasRestantes }}</b>
+  <!-- Nueva card glass -->
+  <div class="evento-glass-card">
+    <div class="evento-glass-left">
+      <div class="evento-descripcion">
+        {{ evento.descripcion }}
+      </div>
     </div>
-    <button class="btn-comprar" [disabled]="!isLoggedIn || yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="comprarEntrada()">
-      <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
-      <ng-container *ngIf="evento.entradasRestantes > 0">{{ yaTieneEntrada ? 'Ya tienes entrada' : (comprando ? 'Comprando...' : 'Comprar entrada') }}</ng-container>
-    </button>
-    <div *ngIf="compraMsg" class="compra-msg">{{ compraMsg }}</div>
+    <div class="evento-glass-right">
+      <div class="entradas-restantes">
+        Entradas restantes: <b>{{ evento.entradasRestantes }}</b>
+      </div>
+      <button class="shadow__btn" [disabled]="!isLoggedIn || yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="intentarComprarEntrada()">
+        <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
+        <ng-container *ngIf="evento.entradasRestantes > 0">{{ yaTieneEntrada ? 'Ya tienes entrada' : (comprando ? 'Comprando...' : 'Comprar entrada') }}</ng-container>
+      </button>
+      <div *ngIf="compraMsg" class="compra-msg">{{ compraMsg }}</div>
+    </div>
   </div>
 </div>
+<app-modal
+  *ngIf="showBuyModal"
+  [titulo]="'Comprar entrada'"
+  [texto]="'¿Seguro que quieres comprar una entrada para este evento?'"
+  [confirmText]="'Comprar'"
+  [cancelText]="'Atrás'"
+  (confirm)="confirmarCompraEntrada()"
+  (cancel)="cancelarCompraEntrada()"
+></app-modal>

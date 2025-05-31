@@ -11,13 +11,20 @@
 }
 
 .equipos-list-vertical {
+  display: flex;
+  justify-content: center;
+}
+
+.equipos-list-vertical-inner {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 5rem;
+  row-gap: 2rem;
+  max-width: 1100px;
 }
 
 @media (max-width: 900px) {
-  .equipos-list-vertical {
+  .equipos-list-vertical-inner {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -26,7 +33,7 @@
   .equipos-page-container {
     padding: 1rem 0.2rem;
   }
-  .equipos-list-vertical {
+  .equipos-list-vertical-inner {
     grid-template-columns: 1fr;
   }
 }

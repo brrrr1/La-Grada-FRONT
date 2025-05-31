@@ -17,16 +17,13 @@
   box-sizing: border-box;
   overflow: visible;
   padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .navbar-center {
-  position: static;
-  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 2;
-  width: auto;
+  justify-content: center;
 }
 
 .navbar-left, .navbar-right {
@@ -37,8 +34,18 @@
   height: 100%;
 }
 
+.navbar-right {
+  min-width: 180px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+
 .logo {
-  height: 128px;
+  height: 40px;
+  max-height: 100%;
   width: auto;
   display: block;
   margin: 0 auto;
@@ -47,7 +54,7 @@
 .menu-btn {
   background: none;
   border: none;
-  color: #fff475;
+  color: #fff;
   font-size: 2.5rem;
   font-family: inherit;
   cursor: pointer;
@@ -65,7 +72,7 @@
   text-decoration: none;
 }
 .menu-btn:hover {
-  color: #fff200;
+  color: #fff;
 }
 
 .menu-overlay {
@@ -75,7 +82,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(30, 30, 30, 0.92);
-  color: #fff475;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,7 +107,7 @@
   margin: 2rem 0;
 }
 .menu-content a {
-  color: #fff475;
+  color: #fff;
   font-size: 2.2rem;
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 700;
@@ -108,7 +115,7 @@
   transition: color 0.2s;
 }
 .menu-content a:hover {
-  color: #fff200;
+  color: #fff;
 }
 .close-btn {
   position: absolute;
@@ -116,19 +123,19 @@
   right: 2rem;
   background: none;
   border: none;
-  color: #fff475;
+  color: #fff;
   font-size: 2.5rem;
   cursor: pointer;
   font-weight: 700;
 }
 .close-btn:hover {
-  color: #fff200;
+  color: #fff;
 }
 
 .logout-btn {
   background: none;
   border: none;
-  color: #fff475;
+  color: #fff;
   font-size: 2rem;
   font-family: inherit;
   cursor: pointer;
@@ -144,7 +151,7 @@
 .login-navbar-btn, .user-navbar-name {
   background: none;
   border: none;
-  color: #fff475;
+  color: #fff;
   font-size: 1.1rem;
   font-family: inherit;
   cursor: pointer;
@@ -159,7 +166,7 @@
   height: 70px;
 }
 .login-navbar-btn:hover {
-  color: #fff200;
+  color: #fff;
 }
 .user-navbar-name {
   cursor: default;
@@ -167,6 +174,39 @@
   display: flex;
   align-items: center;
   height: 70px;
+  padding-right: 20px;
+}
+.user-navbar-name:hover {
+  text-shadow: 0 0 8px rgba(255,255,255,0.7), 0 0 2px #fff;
+}
+
+.user-navbar-link {
+  color: #fff;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  height: 70px;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+  white-space: nowrap;
+  padding: 0 20px;
+}
+.user-navbar-link:hover {
+  color: inherit;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+.user-navbar-options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 @media (max-width: 600px) {
