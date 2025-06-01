@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EquipoService, Equipo } from '../../../services/equipo.service';
 import { AuthService } from '../../../services/auth.service';
 import { EventoService, Evento } from '../../../services/evento.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ModalComponent } from '../../../components/modal/modal/modal.component';
 
 interface EventoCard extends Evento {
   escudo1Url?: string;
@@ -25,12 +27,22 @@ export class EquipoDetalleComponent implements OnInit {
   eventos: EventoCard[] = [];
   eventosLoading = false;
   eventosError = '';
+  esFavorito: boolean = false;
+  @ViewChild('modalConfirm', { static: false }) modalConfirm: ModalComponent | undefined;
+  modalTitulo: string = '';
+  modalTexto: string = '';
+  modalConfirmText: string = '';
+  modalCancelText: string = '';
+  accionFavorito: 'quitar' | 'cambiar' | 'elegir' | null = null;
+  equipoFavoritoNombre: string | null = null;
+  mostrarModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private equipoService: EquipoService,
     private auth: AuthService,
-    private eventoService: EventoService
+    private eventoService: EventoService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -42,6 +54,7 @@ export class EquipoDetalleComponent implements OnInit {
           this.loadImages();
           this.loading = false;
           this.loadEventos();
+          this.comprobarFavorito();
         },
         error: () => {
           this.errorMsg = 'Error al cargar el equipo';
@@ -127,6 +140,97 @@ export class EquipoDetalleComponent implements OnInit {
           this.eventos[idx].fondo2Url = undefined;
         }
       });
+    });
+  }
+
+  comprobarFavorito() {
+    if (!this.equipo) return;
+    const token = this.auth.getToken();
+    if (!token) return;
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    this.http.get<any>('http://localhost:8080/me', { headers }).subscribe({
+      next: (data) => {
+        this.equipoFavoritoNombre = data.equipoFavorito || null;
+        if (data.equipoFavorito && this.equipo) {
+          this.esFavorito = data.equipoFavorito === this.equipo.nombre;
+        } else {
+          this.esFavorito = false;
+        }
+      },
+      error: () => {
+        this.esFavorito = false;
+        this.equipoFavoritoNombre = null;
+      }
+    });
+  }
+
+  onHeartClick() {
+    if (!this.equipo) return;
+    if (!this.equipoFavoritoNombre) {
+      this.accionFavorito = 'elegir';
+      this.marcarComoFavorito();
+      return;
+    }
+    if (this.esFavorito) {
+      this.accionFavorito = 'quitar';
+      this.modalTitulo = 'Quitar equipo favorito';
+      this.modalTexto = `¿Seguro que quieres quitar a ${this.equipo.nombre} como tu equipo favorito?`;
+      this.modalConfirmText = 'Quitar';
+      this.modalCancelText = 'Cancelar';
+      this.mostrarModal = true;
+      return;
+    }
+    if (this.equipoFavoritoNombre && !this.esFavorito) {
+      this.accionFavorito = 'cambiar';
+      this.modalTitulo = 'Cambiar equipo favorito';
+      this.modalTexto = `¿Seguro que quieres cambiar tu equipo favorito de ${this.equipoFavoritoNombre} a ${this.equipo.nombre}?`;
+      this.modalConfirmText = 'Cambiar';
+      this.modalCancelText = 'Cancelar';
+      this.mostrarModal = true;
+      return;
+    }
+  }
+
+  onModalConfirm() {
+    if (this.accionFavorito === 'quitar') {
+      this.quitarFavorito();
+    } else if (this.accionFavorito === 'cambiar') {
+      this.cambiarFavorito();
+    }
+    this.accionFavorito = null;
+    this.mostrarModal = false;
+  }
+
+  onModalCancel() {
+    this.accionFavorito = null;
+    this.mostrarModal = false;
+  }
+
+  marcarComoFavorito() {
+    if (!this.equipo) return;
+    this.auth.chooseFavoriteTeam(this.equipo.id).subscribe({
+      next: () => {
+        this.comprobarFavorito();
+      }
+    });
+  }
+
+  quitarFavorito() {
+    this.auth.removeFavoriteTeam().subscribe({
+      next: () => {
+        this.comprobarFavorito();
+      }
+    });
+  }
+
+  cambiarFavorito() {
+    if (!this.equipo) return;
+    this.auth.changeFavoriteTeam(this.equipo.id).subscribe({
+      next: () => {
+        this.comprobarFavorito();
+      }
     });
   }
 }

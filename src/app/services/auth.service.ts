@@ -77,4 +77,22 @@ export class AuthService {
       return null;
     }
   }
+
+  chooseFavoriteTeam(teamId: string) {
+    const token = this.getToken();
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.post(`${BASE_URL}/user/choose-favorite-team/${teamId}`, {}, { headers });
+  }
+
+  changeFavoriteTeam(newTeamId: string) {
+    const token = this.getToken();
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.post(`${BASE_URL}/user/change-favorite-team/${newTeamId}`, {}, { headers });
+  }
+
+  removeFavoriteTeam() {
+    const token = this.getToken();
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.delete(`${BASE_URL}/user/remove-favorite-team`, { headers });
+  }
 }

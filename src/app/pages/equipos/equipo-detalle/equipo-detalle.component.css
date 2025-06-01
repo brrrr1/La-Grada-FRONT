@@ -147,9 +147,12 @@
   fill: var(--heart-color);
   position: absolute;
 }
+.heart-container .svg-outline {
+  display: block;
+}
 .heart-container .svg-filled {
-  animation: keyframes-svg-filled 1s;
-  display: none;
+  display: block;
+  animation: none;
 }
 .heart-container .svg-celebrate {
   position: absolute;
@@ -160,23 +163,8 @@
   fill: var(--heart-color);
   stroke-width: 2px;
 }
-.heart-container .checkbox:checked~.svg-container .svg-filled {
-  display: block;
-}
 .heart-container .checkbox:checked~.svg-container .svg-celebrate {
   display: block;
-}
-@keyframes keyframes-svg-filled {
-  0% {
-    transform: scale(0);
-  }
-  25% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(1);
-    filter: brightness(1.5);
-  }
 }
 @keyframes keyframes-svg-celebrate {
   0% {
@@ -191,4 +179,11 @@
     opacity: 0;
     display: none;
   }
+}
+
+.favorito-texto {
+  color: gold;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-left: 12px;
 }
