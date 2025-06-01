@@ -211,28 +211,4 @@
     flex-direction: column;
     gap: 0.5rem;
   }
-}
-.password-btn-floating {
-  display: block;
-  margin: 1.1rem auto 0 auto;
-  background: rgba(120,130,150,0.18);
-  color: #fff;
-  border: 1.5px solid rgba(255,255,255,0.22);
-  border-radius: 8px;
-  padding: 0.7rem 2.2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(120,130,150,0.10);
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  letter-spacing: 1px;
-  text-decoration: none;
-}
-.password-btn-floating:hover {
-  background: #607d8b;
-  border: 1.5px solid #b0bec5;
-  box-shadow: 0 0 12px #b0bec5;
-  color: #fff;
 } 
