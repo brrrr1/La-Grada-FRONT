@@ -114,6 +114,7 @@
 }
 .heart-container {
   margin-left: 0;
+  cursor: pointer;
 }
 
 .banner-heart-btn {
