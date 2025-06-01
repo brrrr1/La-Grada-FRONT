@@ -18,7 +18,7 @@ import { EquiposComponent } from './pages/equipos/equipos.component';
 import { EquipoCardComponent } from './components/equipo-card/equipo-card.component';
 import { EquiposListComponent } from './components/equipos-list/equipos-list.component';
 import { EventoCardComponent } from './components/evento-card/evento-card.component';
-import { EventosListComponent } from './components/eventos-list/eventos-list.component';
+import { EventosListComponent } from './pages/eventos-list/eventos-list.component';
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
 import { ModalComponent } from './components/modal/modal/modal.component';
@@ -35,10 +35,10 @@ import { ModalComponent } from './components/modal/modal/modal.component';
     EquipoCardComponent,
     EquiposListComponent,
     EventoCardComponent,
-    EventosListComponent,
     EquipoDetalleComponent,
     EventoDetalleComponent,
-    ModalComponent
+    ModalComponent,
+    EventosListComponent
   ],
   imports: [
     BrowserModule,

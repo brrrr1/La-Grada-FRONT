@@ -42,8 +42,14 @@ export interface Evento {
 export class EventoService {
   constructor(private http: HttpClient) {}
 
-  getProximosEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos`);
+  getProximosEventos(filtros?: any): Observable<Evento[]> {
+    let params: any = {};
+    if (filtros) {
+      if (filtros.nombre) params.nombre = filtros.nombre;
+      if (filtros.equipo) params.equipo = filtros.equipo;
+      if (filtros.aunQuedanEntradas) params.aunQuedanEntradas = true;
+    }
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos`, { params });
   }
 
   getEventosPorEquipo(nombreEquipo: string): Observable<Evento[]> {
@@ -56,5 +62,21 @@ export class EventoService {
 
   buyTicket(eventId: string) {
     return this.http.post(`${BASE_URL}/user/buy-ticket/${eventId}`, {});
+  }
+
+  getProximosEventosAll(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/all`);
+  }
+
+  getProximosEventosCotidianos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/cotidianos`);
+  }
+
+  getProximosEventosImportantes(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/importantes`);
+  }
+
+  getProximosEventosFinales(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/finales`);
   }
 }

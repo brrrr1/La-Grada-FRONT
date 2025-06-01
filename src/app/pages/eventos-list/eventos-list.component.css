@@ -1,0 +1,61 @@
+.eventos-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  margin-top: 90px;
+}
+
+.eventos-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.eventos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.evento-grid-item {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .eventos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .eventos-page-container {
+    padding: 1rem 0.2rem;
+  }
+  .eventos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eventos-tabs button {
+  background: none;
+  border: none;
+  padding: 0.5em 1.5em;
+  font-size: 1.1em;
+  cursor: pointer;
+  color: #fff;
+  transition: color 0.2s, border-color 0.2s;
+  border-bottom: 2px solid transparent;
+  text-decoration: none;
+}
+
+.eventos-tabs button.active-tab {
+  font-weight: bold;
+  color: #fff;
+  border-bottom: 2.5px solid #fff;
+}
+
+.eventos-tabs button:hover {
+  color: #fff;
+  text-decoration: none;
+}

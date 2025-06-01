@@ -7,12 +7,14 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 import { EquiposComponent } from './pages/equipos/equipos.component';
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
+import { EventosListComponent } from './pages/eventos-list/eventos-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', component: MainComponent },
   { path: 'equipos', component: EquiposComponent },
   { path: 'equipos/:id', component: EquipoDetalleComponent },
+  { path: 'eventos', component: EventosListComponent },
   { path: 'eventos/:id', component: EventoDetalleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

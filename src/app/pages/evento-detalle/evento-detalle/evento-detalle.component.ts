@@ -22,6 +22,7 @@ export class EventoDetalleComponent implements OnInit {
   comprando = false;
   compraMsg = '';
   showBuyModal = false;
+  modalTexto = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -128,6 +129,7 @@ export class EventoDetalleComponent implements OnInit {
 
   intentarComprarEntrada() {
     if (!this.evento || this.yaTieneEntrada || this.evento.entradasRestantes <= 0) return;
+    this.modalTexto = `¿Seguro que quieres comprar una entrada para este evento por ${this.evento.precio.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}?`;
     this.showBuyModal = true;
   }
 

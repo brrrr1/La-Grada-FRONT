@@ -31,7 +31,11 @@
       </div>
       <button class="shadow__btn" [disabled]="!isLoggedIn || yaTieneEntrada || evento.entradasRestantes <= 0 || comprando" (click)="intentarComprarEntrada()">
         <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
-        <ng-container *ngIf="evento.entradasRestantes > 0">{{ yaTieneEntrada ? 'Ya tienes entrada' : (comprando ? 'Comprando...' : 'Comprar entrada') }}</ng-container>
+        <ng-container *ngIf="evento.entradasRestantes > 0">
+          <ng-container *ngIf="yaTieneEntrada">Ya tienes entrada</ng-container>
+          <ng-container *ngIf="!yaTieneEntrada && comprando">Comprando...</ng-container>
+          <ng-container *ngIf="!yaTieneEntrada && !comprando">Comprar entrada {{ evento.precio | currency:'EUR':'symbol':'1.2-2' }}</ng-container>
+        </ng-container>
       </button>
       <div *ngIf="compraMsg" class="compra-msg">{{ compraMsg }}</div>
     </div>
@@ -40,7 +44,7 @@
 <app-modal
   *ngIf="showBuyModal"
   [titulo]="'Comprar entrada'"
-  [texto]="'¿Seguro que quieres comprar una entrada para este evento?'"
+  [texto]="modalTexto"
   [confirmText]="'Comprar'"
   [cancelText]="'Atrás'"
   (confirm)="confirmarCompraEntrada()"
