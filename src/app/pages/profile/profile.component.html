@@ -13,6 +13,7 @@
         <span class="profile-info-value">{{ user?.equipoFavorito || 'Ninguno' }}</span>
       </div>
       <button class="edit-btn-floating" (click)="enableEdit()">Editar</button>
+      <button class="password-btn">Cambiar contraseña</button>
     </div>
     <ng-template #editForm>
       <form [formGroup]="profileForm" (ngSubmit)="save()" class="profile-edit-form">

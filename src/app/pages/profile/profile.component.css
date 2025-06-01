@@ -211,4 +211,28 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+}
+.password-btn {
+  display: block;
+  margin: 1.1rem auto 0 auto;
+  background: rgba(30,136,229,0.10);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.18);
+  border-radius: 8px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(30,136,229,0.08);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, border 0.2s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.password-btn:hover {
+  background: #1976d2;
+  border: 1.5px solid #90caf9;
+  box-shadow: 0 0 12px #90caf9;
+  color: #fff;
 } 
