@@ -22,6 +22,7 @@ import { EventosListComponent } from './pages/eventos-list/eventos-list.componen
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
 import { ModalComponent } from './components/modal/modal/modal.component';
+import { ProfileModule } from './pages/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ModalComponent } from './components/modal/modal/modal.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ProfileModule
   ],
   providers: [
     provideAnimationsAsync(),

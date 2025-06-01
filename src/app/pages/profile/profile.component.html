@@ -1,0 +1,50 @@
+<div class="main-container">
+  <div class="profile-card-redesign" [class.edit-mode]="editMode">
+    <div class="profile-avatar-section">
+      <div class="profile-avatar">
+        <span class="profile-avatar-icon">{{ getInitials() }}</span>
+      </div>
+      <div class="profile-nombre">{{ user?.nombre }} {{ user?.apellidos }}</div>
+      <div class="profile-username">{{ user?.correo }}</div>
+    </div>
+    <div class="profile-info-list" *ngIf="!editMode; else editForm">
+      <div class="profile-info-row">
+        <span class="profile-info-label">Equipo favorito:</span>
+        <span class="profile-info-value">{{ user?.equipoFavorito || 'Ninguno' }}</span>
+      </div>
+      <button class="edit-btn-floating" (click)="enableEdit()">Editar</button>
+      <button class="password-btn-floating">Cambiar contraseña</button>
+    </div>
+    <ng-template #editForm>
+      <form [formGroup]="profileForm" (ngSubmit)="save()" class="profile-edit-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input formControlName="nombre" />
+          </div>
+          <div class="form-group">
+            <label>Apellidos</label>
+            <input formControlName="apellidos" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Correo</label>
+            <input formControlName="correo" />
+          </div>
+          <div class="form-group">
+            <label>Equipo favorito</label>
+            <select formControlName="equipoFavoritoId">
+              <option [ngValue]="null">Ninguno</option>
+              <option *ngFor="let equipo of equipos" [ngValue]="equipo.id">{{ equipo.nombre }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="edit-actions">
+          <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
+          <button type="submit" class="save-btn">Guardar</button>
+        </div>
+      </form>
+    </ng-template>
+  </div>
+</div> 
