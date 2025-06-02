@@ -52,7 +52,7 @@ button, .login-btn, .register-btn {
   font-size: 1.1rem;
   font-family: inherit;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none !important;
   margin-top: 1rem;
 }
 

@@ -101,4 +101,12 @@ export class AuthService {
     const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
     return this.http.put(`${BASE_URL}/user/edit-password`, data, { headers });
   }
+
+  checkUsername(username: string) {
+    return this.http.get<boolean>(`${BASE_URL}/auth/check-username`, { params: { username } });
+  }
+
+  checkEmail(correo: string) {
+    return this.http.get<boolean>(`${BASE_URL}/auth/check-email`, { params: { correo } });
+  }
 }

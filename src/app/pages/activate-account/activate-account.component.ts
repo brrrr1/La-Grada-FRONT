@@ -22,7 +22,7 @@ export class ActivateAccountComponent {
     this.auth.activateAccount(this.token).subscribe({
       next: () => {
         this.loading = false;
-        this.successMsg = 'Cuenta activada correctamente. Ahora puedes iniciar sesión.';
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.loading = false;
