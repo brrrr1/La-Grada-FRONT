@@ -34,6 +34,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserName();
+    this.auth.userChanged$.subscribe(() => {
+      this.loadUserName();
+    });
   }
 
   toggleMenu() {

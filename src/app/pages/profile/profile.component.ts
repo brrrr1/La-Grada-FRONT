@@ -115,6 +115,7 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         this.editMode = false;
         this.loadUser();
+        this.auth.notifyUserChanged();
       }
     });
   }

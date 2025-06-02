@@ -27,6 +27,7 @@ export class LoginComponent {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
         this.loading = false;
+        this.auth.notifyUserChanged();
         this.router.navigate(['/main']);
       },
       error: (err) => {

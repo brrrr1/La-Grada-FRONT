@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, Subject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 const BASE_URL = 'http://localhost:8080';
@@ -108,5 +108,11 @@ export class AuthService {
 
   checkEmail(correo: string) {
     return this.http.get<boolean>(`${BASE_URL}/auth/check-email`, { params: { correo } });
+  }
+
+  userChanged$ = new Subject<void>();
+
+  notifyUserChanged() {
+    this.userChanged$.next();
   }
 }
