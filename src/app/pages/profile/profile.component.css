@@ -1,5 +1,4 @@
 .profile-card-redesign {
-  max-width: 380px;
   margin: 60px auto 0 auto;
   background: rgba(36, 40, 50, 0.55);
   border-radius: 18px;
@@ -18,6 +17,7 @@
   transition: max-width 0.6s cubic-bezier(0.4,0,0.2,1), min-height 0.6s cubic-bezier(0.4,0,0.2,1), max-height 0.6s cubic-bezier(0.4,0,0.2,1);
   min-height: 420px;
   max-height: 420px;
+  width: 380px;
 }
 .profile-card-redesign.edit-mode {
   max-width: 600px;
@@ -235,4 +235,38 @@
   border: 1.5px solid #90caf9;
   box-shadow: 0 0 12px #90caf9;
   color: #fff;
+}
+.main-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+.profile-card-redesign.show-password-form {
+  max-height: none !important;
+  overflow: visible !important;
+}
+.password-form-container {
+  width: 100%;
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.password-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.error-message {
+  color: #ff5252;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.success-message {
+  color: #4caf50;
+  margin-top: 0.5rem;
+  text-align: center;
 } 

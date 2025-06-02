@@ -7,16 +7,16 @@
       <div class="profile-nombre">{{ user?.nombre }} {{ user?.apellidos }}</div>
       <div class="profile-username">{{ user?.correo }}</div>
     </div>
-    <div class="profile-info-list" *ngIf="!editMode; else editForm">
+    <div class="profile-info-list" *ngIf="!editMode && !passwordMode; else editOrPasswordForm">
       <div class="profile-info-row">
         <span class="profile-info-label">Equipo favorito:</span>
         <span class="profile-info-value">{{ user?.equipoFavorito || 'Ninguno' }}</span>
       </div>
       <button class="edit-btn-floating" (click)="enableEdit()">Editar</button>
-      <button class="password-btn">Cambiar contraseña</button>
+      <button class="password-btn" (click)="enablePasswordMode()">Cambiar contraseña</button>
     </div>
-    <ng-template #editForm>
-      <form [formGroup]="profileForm" (ngSubmit)="save()" class="profile-edit-form">
+    <ng-template #editOrPasswordForm>
+      <form *ngIf="editMode" [formGroup]="profileForm" (ngSubmit)="save()" class="profile-edit-form">
         <div class="form-row">
           <div class="form-group">
             <label>Nombre</label>
@@ -44,6 +44,24 @@
           <button type="button" class="cancel-btn" (click)="cancelEdit()">Cancelar</button>
           <button type="submit" class="save-btn">Guardar</button>
         </div>
+      </form>
+      <form *ngIf="passwordMode" [formGroup]="passwordForm" (ngSubmit)="changePassword()" class="profile-edit-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Contraseña actual</label>
+            <input type="password" formControlName="oldPassword" required />
+          </div>
+          <div class="form-group">
+            <label>Nueva contraseña</label>
+            <input type="password" formControlName="newPassword" required />
+          </div>
+        </div>
+        <div class="edit-actions">
+          <button type="button" class="cancel-btn" (click)="cancelPasswordMode()">Cancelar</button>
+          <button type="submit" class="save-btn">Guardar</button>
+        </div>
+        <div *ngIf="passwordChangeError" class="error-message">{{ passwordChangeError }}</div>
+        <div *ngIf="passwordChangeSuccess" class="success-message">Contraseña cambiada correctamente.</div>
       </form>
     </ng-template>
   </div>

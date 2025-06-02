@@ -12,4 +12,9 @@ export interface EditUserInfoDto {
   apellidos: string;
   correo: string;
   equipoFavoritoId: string | null;
+}
+
+export interface EditUserPasswordDto {
+  oldPassword: string;
+  newPassword: string;
 } 

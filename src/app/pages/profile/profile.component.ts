@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
 import { EquipoService } from '../../services/equipo.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { User, EditUserInfoDto } from '../../models/user.model';
+import { User, EditUserInfoDto, EditUserPasswordDto } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -14,19 +15,28 @@ export class ProfileComponent implements OnInit {
   user: User | null = null;
   equipos: any[] = [];
   editMode = false;
+  passwordMode = false;
   profileForm: FormGroup;
+  passwordForm: FormGroup;
+  passwordChangeSuccess: boolean | null = null;
+  passwordChangeError: string | null = null;
 
   constructor(
     private http: HttpClient,
     private auth: AuthService,
     private equipoService: EquipoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.profileForm = this.fb.group({
       nombre: [''],
       apellidos: [''],
       correo: [''],
       equipoFavoritoId: [null]
+    });
+    this.passwordForm = this.fb.group({
+      oldPassword: [''],
+      newPassword: ['']
     });
   }
 
@@ -71,11 +81,28 @@ export class ProfileComponent implements OnInit {
 
   enableEdit() {
     this.editMode = true;
+    this.passwordMode = false;
+  }
+
+  enablePasswordMode() {
+    this.passwordMode = true;
+    this.editMode = false;
+    this.passwordChangeSuccess = null;
+    this.passwordChangeError = null;
+    this.passwordForm.reset();
   }
 
   cancelEdit() {
     this.editMode = false;
+    this.passwordMode = false;
     this.loadUser();
+  }
+
+  cancelPasswordMode() {
+    this.passwordMode = false;
+    this.passwordChangeSuccess = null;
+    this.passwordChangeError = null;
+    this.passwordForm.reset();
   }
 
   save() {
@@ -99,5 +126,25 @@ export class ProfileComponent implements OnInit {
     const n = nombre.trim().split(' ')[0];
     const a = apellidos.trim().split(' ')[0];
     return (n.charAt(0) + (a.charAt(0) || '')).toUpperCase();
+  }
+
+  changePassword() {
+    const data: EditUserPasswordDto = {
+      oldPassword: this.passwordForm.value.oldPassword,
+      newPassword: this.passwordForm.value.newPassword
+    };
+    this.auth.changePassword(data).subscribe({
+      next: () => {
+        this.passwordChangeSuccess = true;
+        this.passwordChangeError = null;
+        this.auth.logout().subscribe(() => {
+          this.router.navigate(['/login']);
+        });
+      },
+      error: (err) => {
+        this.passwordChangeSuccess = false;
+        this.passwordChangeError = err.error?.message || 'Error al cambiar la contraseña.';
+      }
+    });
   }
 } 

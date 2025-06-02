@@ -95,4 +95,10 @@ export class AuthService {
     const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
     return this.http.delete(`${BASE_URL}/user/remove-favorite-team`, { headers });
   }
+
+  changePassword(data: import('../models/user.model').EditUserPasswordDto) {
+    const token = this.getToken();
+    const headers = token ? new HttpHeaders({ Authorization: `Bearer ${token}` }) : undefined;
+    return this.http.put(`${BASE_URL}/user/edit-password`, data, { headers });
+  }
 }
