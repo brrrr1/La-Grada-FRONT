@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Evento, EventoService } from '../../../services/evento.service';
 import { EquipoService } from '../../../services/equipo.service';
 import { AuthService } from '../../../services/auth.service';
+import { NotificationComponent } from '../../../components/notification/notification.component';
 
 @Component({
   selector: 'app-evento-detalle',
@@ -20,9 +21,13 @@ export class EventoDetalleComponent implements OnInit {
   usuarioId: string | null = null;
   yaTieneEntrada = false;
   comprando = false;
-  compraMsg = '';
   showBuyModal = false;
   modalTexto = '';
+  notification = {
+    show: false,
+    message: '',
+    type: 'success' as 'success' | 'error' | 'info',
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -102,15 +107,14 @@ export class EventoDetalleComponent implements OnInit {
   comprarEntrada() {
     if (!this.evento || this.yaTieneEntrada || this.evento.entradasRestantes <= 0) return;
     this.comprando = true;
-    this.compraMsg = '';
+    this.hideNotification();
     this.eventoService.buyTicket(this.evento.id).subscribe({
       next: () => {
-        this.compraMsg = '¡Entrada comprada con éxito!';
         // Actualizar estado local
         this.evento!.entradasRestantes--;
         if (this.usuarioId) {
           this.evento!.entradas.push({
-            id: 'fake', // El backend no devuelve la entrada, pero así se actualiza el estado visual
+            id: 'fake',
             usuarioId: this.usuarioId,
             usuarioNombre: '',
             usuarioApellidos: '',
@@ -119,10 +123,11 @@ export class EventoDetalleComponent implements OnInit {
         }
         this.comprobarEntrada();
         this.comprando = false;
+        this.showNotification('¡Entrada comprada con éxito!', 'success');
       },
       error: (err) => {
-        this.compraMsg = err?.error?.message || 'Error al comprar la entrada';
         this.comprando = false;
+        this.showNotification(err?.error?.message || 'Error al comprar la entrada', 'error');
       }
     });
   }
@@ -156,5 +161,13 @@ export class EventoDetalleComponent implements OnInit {
     if (this.evento) {
       this.router.navigate(['/equipos', this.evento.equipo2.id]);
     }
+  }
+
+  showNotification(message: string, type: 'success' | 'error' | 'info' = 'info') {
+    this.notification = { show: true, message, type };
+  }
+
+  hideNotification() {
+    this.notification.show = false;
   }
 }

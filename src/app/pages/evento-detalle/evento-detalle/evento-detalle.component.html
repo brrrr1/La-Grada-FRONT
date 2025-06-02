@@ -37,7 +37,6 @@
           <ng-container *ngIf="!yaTieneEntrada && !comprando">Comprar entrada {{ evento.precio | currency:'EUR':'symbol':'1.2-2' }}</ng-container>
         </ng-container>
       </button>
-      <div *ngIf="compraMsg" class="compra-msg">{{ compraMsg }}</div>
     </div>
   </div>
 </div>
@@ -50,3 +49,10 @@
   (confirm)="confirmarCompraEntrada()"
   (cancel)="cancelarCompraEntrada()"
 ></app-modal>
+<app-notification
+  [message]="notification.message"
+  [type]="notification.type"
+  [show]="notification.show"
+  [duration]="3000"
+  (closed)="hideNotification()"
+></app-notification>

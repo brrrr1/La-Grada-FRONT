@@ -23,6 +23,7 @@ import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-de
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
 import { ModalComponent } from './components/modal/modal/modal.component';
 import { ProfileModule } from './pages/profile/profile.module';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProfileModule } from './pages/profile/profile.module';
     EquipoDetalleComponent,
     EventoDetalleComponent,
     ModalComponent,
-    EventosListComponent
+    EventosListComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,
