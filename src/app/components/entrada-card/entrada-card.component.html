@@ -1,0 +1,14 @@
+<div class="entrada-card">
+  <div class="entrada-info">
+    <div class="evento-nombre">{{ entrada.evento.nombre }}</div>
+    <div class="evento-escudos">
+      <img *ngIf="entrada.evento.equipo1?.escudoUrl" [src]="entrada.evento.equipo1.escudoUrl" [alt]="entrada.evento.equipo1.nombre + ' escudo'" class="evento-escudo" />
+      <span class="evento-vs">vs</span>
+      <img *ngIf="entrada.evento.equipo2?.escudoUrl" [src]="entrada.evento.equipo2.escudoUrl" [alt]="entrada.evento.equipo2.nombre + ' escudo'" class="evento-escudo" />
+    </div>
+    <div class="evento-fecha">{{ entrada.evento.fechaYHora | date:'medium' }}</div>
+  </div>
+  <div class="entrada-qr">
+    <img [src]="getSafeQrUrl(entrada.qrBase64)" alt="QR Entrada" class="qr-img" />
+  </div>
+</div> 

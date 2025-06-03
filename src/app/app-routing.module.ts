@@ -9,6 +9,8 @@ import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-de
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
 import { EventosListComponent } from './pages/eventos-list/eventos-list.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
+import { HistorialComponent } from './pages/historial/historial.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'activate-account', component: ActivateAccountComponent },
-  { path: 'perfil', component: ProfileComponent }
+  { path: 'perfil', component: ProfileComponent },
+  { path: 'entradas', component: EntradasListComponent },
+  { path: 'historial', component: HistorialComponent }
 ];
 
 @NgModule({

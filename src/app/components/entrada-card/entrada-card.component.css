@@ -1,0 +1,76 @@
+.entrada-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+  padding: 0.2rem 1.2rem;
+  margin-bottom: 1.5rem;
+  min-height: 180px;
+  height: 180px;
+  position: relative;
+  justify-content: space-between;
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  background: rgba(30,30,30,0.18);
+}
+
+.entrada-info {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.evento-nombre {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.evento-escudos {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.evento-escudo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.evento-vs {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.evento-fecha {
+  color: #b3cfff;
+  font-size: 1rem;
+}
+
+.entrada-qr {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2rem;
+}
+
+.qr-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+} 

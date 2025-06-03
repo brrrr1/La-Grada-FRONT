@@ -36,6 +36,16 @@ export interface Evento {
   entradas: Entrada[];
 }
 
+export interface GetEntradaDto {
+  id: string;
+  usuarioId: string;
+  usuarioNombre: string;
+  usuarioApellidos: string;
+  usuarioCorreo: string;
+  evento: any; // Puedes tipar mejor si tienes el modelo
+  qrBase64: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -78,5 +88,13 @@ export class EventoService {
 
   getProximosEventosFinales(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/finales`);
+  }
+
+  getEntradasFuturasUsuario(): Observable<GetEntradaDto[]> {
+    return this.http.get<GetEntradaDto[]>(`${BASE_URL}/user/entradas/futuras`);
+  }
+
+  getEntradasPasadasUsuario(): Observable<GetEntradaDto[]> {
+    return this.http.get<GetEntradaDto[]>(`${BASE_URL}/user/entradas/pasadas`);
   }
 }

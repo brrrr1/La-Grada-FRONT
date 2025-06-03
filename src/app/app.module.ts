@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,9 @@ import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/ev
 import { ModalComponent } from './components/modal/modal/modal.component';
 import { ProfileModule } from './pages/profile/profile.module';
 import { NotificationComponent } from './components/notification/notification.component';
+import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
+import { HistorialComponent } from './pages/historial/historial.component';
+import { EntradaCardComponent } from './components/entrada-card/entrada-card.component';
 
 @NgModule({
   declarations: [
@@ -41,14 +45,18 @@ import { NotificationComponent } from './components/notification/notification.co
     EventoDetalleComponent,
     ModalComponent,
     EventosListComponent,
-    NotificationComponent
+    NotificationComponent,
+    EntradasListComponent,
+    HistorialComponent,
+    EntradaCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ProfileModule
+    ProfileModule,
+    CommonModule
   ],
   providers: [
     provideAnimationsAsync(),
