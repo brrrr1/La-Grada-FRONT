@@ -3,8 +3,12 @@
   <div *ngIf="loading">Cargando equipos...</div>
   <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 
-  <div class="equipos-grid">
-    <app-equipo-card *ngFor="let equipo of equipos" [equipo]="equipo"></app-equipo-card>
+  <div class="equipos-outer">
+    <div class="equipos-scroll">
+      <div class="equipos-grid">
+        <app-equipo-card *ngFor="let equipo of equipos" [equipo]="equipo"></app-equipo-card>
+      </div>
+    </div>
   </div>
 
   <h2 class="eventos-title"><a routerLink="/eventos" style="color:inherit;text-decoration:none;cursor:pointer;">Eventos</a></h2>

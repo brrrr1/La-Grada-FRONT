@@ -10,6 +10,10 @@
   margin-bottom: 2rem;
 }
 
+.equipos-list-vertical, .equipos-list-vertical-inner {
+  overflow: visible !important;
+}
+
 .equipos-list-vertical {
   display: flex;
   justify-content: center;
