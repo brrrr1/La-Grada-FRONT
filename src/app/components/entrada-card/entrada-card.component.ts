@@ -9,10 +9,19 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class EntradaCardComponent {
   @Input() entrada!: GetEntradaDto;
+  isModalOpen = false;
 
   constructor(private sanitizer: DomSanitizer) {}
 
   getSafeQrUrl(base64: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64);
+  }
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
   }
 } 

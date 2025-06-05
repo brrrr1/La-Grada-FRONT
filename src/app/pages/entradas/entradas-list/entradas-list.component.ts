@@ -54,6 +54,22 @@ export class EntradasListComponent implements OnInit {
           this.entradas[idx].evento.equipo2.escudoUrl = undefined;
         }
       });
+      this.equipoService.downloadImage(entrada.evento.equipo1.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.entradas[idx].evento.equipo1.fondoUrl = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.entradas[idx].evento.equipo1.fondoUrl = undefined;
+        }
+      });
+      this.equipoService.downloadImage(entrada.evento.equipo2.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.entradas[idx].evento.equipo2.fondoUrl = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.entradas[idx].evento.equipo2.fondoUrl = undefined;
+        }
+      });
     });
   }
 
