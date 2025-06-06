@@ -2,6 +2,7 @@
   <img *ngIf="evento.fondo1Url" [src]="evento.fondo1Url" alt="Fondo 1" class="evento-fondo-blur left" />
   <img *ngIf="evento.fondo2Url" [src]="evento.fondo2Url" alt="Fondo 2" class="evento-fondo-blur right" />
   <div class="evento-nombre">{{ evento.nombre }}</div>
+  <div class="evento-tipo">{{ evento.tipoEvento }}</div>
   <div class="evento-escudos">
     <img *ngIf="evento.escudo1Url" [src]="evento.escudo1Url" [alt]="evento.equipo1.nombre + ' escudo'" class="evento-escudo" />
     <span class="evento-vs">vs</span>

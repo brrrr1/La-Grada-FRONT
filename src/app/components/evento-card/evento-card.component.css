@@ -55,8 +55,20 @@
   color: #fff;
   font-size: 1.4rem;
   font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.evento-tipo {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 1.2rem;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .evento-escudos {

@@ -9,7 +9,10 @@
       </div>
     </div>
     <div class="banner-centro">
-      <div class="banner-titulo">{{ evento.nombre }}</div>
+      <div class="banner-nombre-tipo">
+        <div class="banner-titulo">{{ evento.nombre }}</div>
+        <div class="banner-tipo-evento">{{ evento.tipoEvento }}</div>
+      </div>
     </div>
     <div class="banner-mitad banner-mitad-der" [ngStyle]="{ 'background-image': fondo2Url ? 'url(' + fondo2Url + ')' : 'none' }">
       <div class="banner-escudo-nombre">
