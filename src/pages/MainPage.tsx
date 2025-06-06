@@ -3,7 +3,6 @@ import EquipoCard from '../components/EquipoCard/EquipoCard';
 import EventoCard from '../components/EventoCard/EventoCard';
 import './main/main.component.css';
 
-// Tipos simplificados para ejemplo
 interface Equipo {
   nombre: string;
   escudoUrl?: string;
@@ -26,9 +25,7 @@ const MainPage: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [errorEventos, setErrorEventos] = useState('');
 
-  // Simulación de carga de datos
   useEffect(() => {
-    // Aquí iría la llamada real a la API
     setTimeout(() => {
       setEquipos([
         { nombre: 'Equipo 1', escudoUrl: '', fondoUrl: '' },

@@ -69,7 +69,6 @@
   box-sizing: border-box;
 }
 
-/* Eliminar estilos antiguos */
 .equipo-card::before, .card-fondo, .fondo-blur, .card-nombre-escudo, .card-nombre, .equipo-nombre, .equipo-escudo {
   display: none !important;
 }

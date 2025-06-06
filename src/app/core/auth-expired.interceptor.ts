@@ -27,7 +27,6 @@ export class AuthExpiredInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        // Ignorar rutas públicas
         if (isPublicEndpoint(req.url)) {
           return throwError(() => error);
         }

@@ -1,27 +1,30 @@
 .eventos-page-container {
+  padding: 2em;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-  margin-top: 90px;
 }
 
 .eventos-title {
-  text-align: center;
+  font-size: 2em;
   margin-bottom: 2rem;
+  font-weight: 500;
+  padding-top: 100px;
 }
 
 .eventos-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 2.5rem;
-  overflow: visible !important;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2em;
+  margin-top: 1rem;
 }
 
 .evento-grid-item {
-  display: flex;
-  justify-content: center;
-  overflow: visible !important;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.evento-grid-item:hover {
+  transform: translateY(-5px);
 }
 
 @media (max-width: 900px) {
@@ -39,25 +42,131 @@
   }
 }
 
-.eventos-tabs button {
-  background: none;
-  border: none;
-  padding: 0.5em 1.5em;
-  font-size: 1.1em;
-  cursor: pointer;
-  color: #fff;
-  transition: color 0.2s, border-color 0.2s;
-  border-bottom: 2px solid transparent;
-  text-decoration: none;
+.filters-container {
+  margin-bottom: 2em;
 }
 
-.eventos-tabs button.active-tab {
-  font-weight: bold;
-  color: #fff;
-  border-bottom: 2.5px solid #fff;
+.filter-group {
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 2.8em;
+}
+
+.filter-input {
+  padding: 0.8em 1.2em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 1em;
+  min-width: 200px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: inherit;
+  transition: all 0.3s ease;
+  height: 2.8em;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.filter-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  cursor: pointer;
+  user-select: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  line-height: 1;
+  height: 2.8em;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.checkbox-label:hover {
+  opacity: 0.8;
+}
+
+.checkbox-label input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 0.3em;
+  height: 0.6em;
+  border: solid rgba(255, 255, 255, 0.8);
+  border-width: 0 2px 2px 0;
+}
+
+.eventos-tabs {
+  display: flex;
+  gap: 1em;
+  margin-bottom: 0 !important;
+  padding-bottom: 2em;
+}
+
+.eventos-tabs button {
+  padding: 0.8em 1.5em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .eventos-tabs button:hover {
-  color: #fff;
-  text-decoration: none;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.eventos-tabs button.active-tab {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.error {
+  color: #ff4444;
+  margin: 2em 0;
+  padding: 1em;
+  border-radius: 8px;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.2);
 }

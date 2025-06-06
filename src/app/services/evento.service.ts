@@ -74,20 +74,36 @@ export class EventoService {
     return this.http.post(`${BASE_URL}/user/buy-ticket/${eventId}`, {});
   }
 
-  getProximosEventosAll(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/all`);
+  getProximosEventosAll(nombreEquipo?: string, nombreEvento?: string, tieneEntradasDisponibles?: boolean): Observable<Evento[]> {
+    const params: any = {};
+    if (nombreEquipo) params.nombreEquipo = nombreEquipo;
+    if (nombreEvento) params.nombreEvento = nombreEvento;
+    if (tieneEntradasDisponibles !== undefined) params.tieneEntradasDisponibles = tieneEntradasDisponibles;
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/all`, { params });
   }
 
-  getProximosEventosCotidianos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/cotidianos`);
+  getProximosEventosCotidianos(nombreEquipo?: string, nombreEvento?: string, tieneEntradasDisponibles?: boolean): Observable<Evento[]> {
+    const params: any = {};
+    if (nombreEquipo) params.nombreEquipo = nombreEquipo;
+    if (nombreEvento) params.nombreEvento = nombreEvento;
+    if (tieneEntradasDisponibles !== undefined) params.tieneEntradasDisponibles = tieneEntradasDisponibles;
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/cotidianos`, { params });
   }
 
-  getProximosEventosImportantes(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/importantes`);
+  getProximosEventosImportantes(nombreEquipo?: string, nombreEvento?: string, tieneEntradasDisponibles?: boolean): Observable<Evento[]> {
+    const params: any = {};
+    if (nombreEquipo) params.nombreEquipo = nombreEquipo;
+    if (nombreEvento) params.nombreEvento = nombreEvento;
+    if (tieneEntradasDisponibles !== undefined) params.tieneEntradasDisponibles = tieneEntradasDisponibles;
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/importantes`, { params });
   }
 
-  getProximosEventosFinales(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/finales`);
+  getProximosEventosFinales(nombreEquipo?: string, nombreEvento?: string, tieneEntradasDisponibles?: boolean): Observable<Evento[]> {
+    const params: any = {};
+    if (nombreEquipo) params.nombreEquipo = nombreEquipo;
+    if (nombreEvento) params.nombreEvento = nombreEvento;
+    if (tieneEntradasDisponibles !== undefined) params.tieneEntradasDisponibles = tieneEntradasDisponibles;
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/proximos/finales`, { params });
   }
 
   getEntradasFuturasUsuario(): Observable<GetEntradaDto[]> {

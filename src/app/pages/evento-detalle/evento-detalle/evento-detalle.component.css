@@ -156,7 +156,6 @@
   backdrop-filter: none;
 }
 
-/* Nuevo botón de compra estilo Uiverse.io adaptado */
 .shadow__btn {
   padding: 10px 20px;
   border: none;
@@ -207,11 +206,6 @@
   }
 }
 
-.evento-banner::after {
-  /* Eliminado el overlay oscuro */
-}
-
-/* Card estilo glass con grain */
 .evento-glass-card {
   display: flex;
   flex-direction: row;
@@ -246,7 +240,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.85; /* aún más visible */
+  opacity: 0.85;
   background-image: url('data:image/svg+xml;utf8,<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="2.2" numOctaves="8" seed="13"/></filter><rect width="80" height="80" filter="url(%23grain)"/></svg>');
   background-size: 60px 60px;
   background-repeat: repeat;

@@ -30,12 +30,23 @@ export class EventosListComponent implements OnInit {
   ];
   activeTab = 'all';
 
+  nombreEquipo = '';
+  nombreEvento = '';
+  tieneEntradasDisponibles = false;
+  private filterSubject = new Subject<void>();
+
   constructor(
     private eventoService: EventoService,
     private equipoService: EquipoService,
     private auth: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.filterSubject.pipe(
+      debounceTime(300)
+    ).subscribe(() => {
+      this.aplicarFiltros();
+    });
+  }
 
   ngOnInit() {
     this.aplicarFiltros();
@@ -46,21 +57,41 @@ export class EventosListComponent implements OnInit {
     this.aplicarFiltros();
   }
 
+  onFilterChange() {
+    this.filterSubject.next();
+  }
+
   aplicarFiltros() {
     this.loading = true;
     let obs;
     switch (this.activeTab) {
       case 'cotidianos':
-        obs = this.eventoService.getProximosEventosCotidianos();
+        obs = this.eventoService.getProximosEventosCotidianos(
+          this.nombreEquipo,
+          this.nombreEvento,
+          this.tieneEntradasDisponibles
+        );
         break;
       case 'importantes':
-        obs = this.eventoService.getProximosEventosImportantes();
+        obs = this.eventoService.getProximosEventosImportantes(
+          this.nombreEquipo,
+          this.nombreEvento,
+          this.tieneEntradasDisponibles
+        );
         break;
       case 'finales':
-        obs = this.eventoService.getProximosEventosFinales();
+        obs = this.eventoService.getProximosEventosFinales(
+          this.nombreEquipo,
+          this.nombreEvento,
+          this.tieneEntradasDisponibles
+        );
         break;
       default:
-        obs = this.eventoService.getProximosEventosAll();
+        obs = this.eventoService.getProximosEventosAll(
+          this.nombreEquipo,
+          this.nombreEvento,
+          this.tieneEntradasDisponibles
+        );
     }
     obs.subscribe({
       next: (data) => {

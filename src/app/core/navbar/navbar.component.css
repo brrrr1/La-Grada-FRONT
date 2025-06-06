@@ -221,7 +221,6 @@ body {
   padding-top: 70px;
 }
 
-/* Fade oscuro extra para mejorar contraste */
 .navbar::before {
   content: '';
   position: absolute;
@@ -232,7 +231,6 @@ body {
   border-radius: inherit;
 }
 
-/* Fade-out inferior para transición suave */
 .navbar::after {
   content: '';
   position: absolute;

@@ -81,7 +81,6 @@
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  /* border: 2px solid #eee; */
   z-index: 4;
   position: relative;
   display: block;
@@ -89,7 +88,6 @@
   margin-right: auto;
 }
 
-/* Modal styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -160,7 +158,6 @@
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  /* border: 2px solid #eee; */
   z-index: 4;
   position: relative;
   display: block;
