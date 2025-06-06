@@ -28,6 +28,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
 import { HistorialComponent } from './pages/historial/historial.component';
 import { EntradaCardComponent } from './components/entrada-card/entrada-card.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EntradaCardComponent } from './components/entrada-card/entrada-card.com
     NotificationComponent,
     EntradasListComponent,
     HistorialComponent,
-    EntradaCardComponent
+    EntradaCardComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { EventosListComponent } from './pages/eventos-list/eventos-list.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
 import { HistorialComponent } from './pages/historial/historial.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'activate-account', component: ActivateAccountComponent },
   { path: 'perfil', component: ProfileComponent },
   { path: 'entradas', component: EntradasListComponent },
-  { path: 'historial', component: HistorialComponent }
+  { path: 'historial', component: HistorialComponent },
+  { path: 'sobre-nosotros', component: AboutComponent }
 ];
 
 @NgModule({

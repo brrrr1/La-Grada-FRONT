@@ -30,13 +30,9 @@
     <button class="close-btn" (click)="toggleMenu()">✕</button>
     <ul>
       <li><a routerLink="/main" (click)="toggleMenu()">Inicio</a></li>
-      <li><a routerLink="/login" (click)="toggleMenu()">Login</a></li>
-      <li><a routerLink="/register" (click)="toggleMenu()">Registro</a></li>
-      <li><a routerLink="/activate-account" (click)="toggleMenu()">Activar cuenta</a></li>
-      <li><a href="#">Opción de ejemplo</a></li>
-      <li *ngIf="isLoggedIn()">
-        <button class="logout-btn" (click)="logout()">Logout</button>
-      </li>
+      <li><a routerLink="/equipos" (click)="toggleMenu()">Equipos</a></li>
+      <li><a routerLink="/eventos" (click)="toggleMenu()">Eventos</a></li>
+      <li><a routerLink="/sobre-nosotros" (click)="toggleMenu()">Sobre Nosotros</a></li>
     </ul>
   </div>
 </div>
