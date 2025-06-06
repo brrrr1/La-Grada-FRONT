@@ -27,6 +27,7 @@ export class EventoDetalleComponent implements OnInit {
     show: false,
     message: '',
     type: 'success' as 'success' | 'error' | 'info',
+    actionButton: undefined as { text: string; route: string } | undefined
   };
 
   constructor(
@@ -164,7 +165,12 @@ export class EventoDetalleComponent implements OnInit {
   }
 
   showNotification(message: string, type: 'success' | 'error' | 'info' = 'info') {
-    this.notification = { show: true, message, type };
+    this.notification = { 
+      show: true, 
+      message, 
+      type,
+      actionButton: type === 'success' && message.includes('comprada') ? { text: 'Ver entradas', route: '/entradas' } : undefined
+    };
   }
 
   hideNotification() {

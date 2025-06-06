@@ -27,12 +27,15 @@ export class MainComponent implements OnInit {
   equipos: EquipoCard[] = [];
   eventos: EventoCard[] = [];
   eventosFuturos: EventoCard[] = [];
+  eventosEquipoFavorito: EventoCard[] = [];
   loading = true;
   loadingEventos = true;
   loadingEventosFuturos = false;
+  loadingEventosEquipoFavorito = false;
   errorMsg = '';
   errorEventos = '';
   errorEventosFuturos = '';
+  errorEventosEquipoFavorito = '';
   userName: string | null = null;
 
   constructor(
@@ -67,6 +70,7 @@ export class MainComponent implements OnInit {
     });
     this.loadUserName();
     this.loadEventosFuturos();
+    this.loadEventosEquipoFavorito();
   }
 
   loadImages() {
@@ -197,6 +201,61 @@ export class MainComponent implements OnInit {
         },
         error: () => {
           this.eventosFuturos[idx].fondo2Url = undefined;
+        }
+      });
+    });
+  }
+
+  loadEventosEquipoFavorito() {
+    if (!this.auth.isLoggedIn()) return;
+    this.loadingEventosEquipoFavorito = true;
+    this.errorEventosEquipoFavorito = '';
+    this.eventoService.getProximosEventosEquipoFavorito().subscribe({
+      next: (data) => {
+        this.eventosEquipoFavorito = data;
+        this.loadEscudosEventosEquipoFavorito();
+        this.loadingEventosEquipoFavorito = false;
+      },
+      error: () => {
+        this.errorEventosEquipoFavorito = 'Error al cargar los eventos de tu equipo favorito';
+        this.loadingEventosEquipoFavorito = false;
+      }
+    });
+  }
+
+  loadEscudosEventosEquipoFavorito() {
+    const token = this.auth.getToken() || undefined;
+    this.eventosEquipoFavorito.forEach((evento, idx) => {
+      this.equipoService.downloadImage(evento.equipo1.fotoEscudo, token).subscribe({
+        next: (blob) => {
+          this.eventosEquipoFavorito[idx].escudo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosEquipoFavorito[idx].escudo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoEscudo, token).subscribe({
+        next: (blob) => {
+          this.eventosEquipoFavorito[idx].escudo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosEquipoFavorito[idx].escudo2Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo1.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventosEquipoFavorito[idx].fondo1Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosEquipoFavorito[idx].fondo1Url = undefined;
+        }
+      });
+      this.equipoService.downloadImage(evento.equipo2.fotoFondo, token).subscribe({
+        next: (blob) => {
+          this.eventosEquipoFavorito[idx].fondo2Url = URL.createObjectURL(blob);
+        },
+        error: () => {
+          this.eventosEquipoFavorito[idx].fondo2Url = undefined;
         }
       });
     });

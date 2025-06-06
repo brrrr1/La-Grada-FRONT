@@ -27,8 +27,25 @@
     <h2 class="eventos-title">Tus próximos eventos</h2>
     <div *ngIf="loadingEventosFuturos">Cargando tus eventos...</div>
     <div *ngIf="errorEventosFuturos" class="error">{{ errorEventosFuturos }}</div>
-    <div class="eventos-grid">
-      <app-evento-card *ngFor="let evento of eventosFuturos" [evento]="evento"></app-evento-card>
+    <div class="eventos-outer">
+      <div class="eventos-scroll">
+        <div class="eventos-grid">
+          <app-evento-card *ngFor="let evento of eventosFuturos" [evento]="evento"></app-evento-card>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="auth.isLoggedIn() && eventosEquipoFavorito.length > 0">
+    <h2 class="eventos-title">Próximos eventos de tu equipo favorito</h2>
+    <div *ngIf="loadingEventosEquipoFavorito">Cargando eventos de tu equipo favorito...</div>
+    <div *ngIf="errorEventosEquipoFavorito" class="error">{{ errorEventosEquipoFavorito }}</div>
+    <div class="eventos-outer">
+      <div class="eventos-scroll">
+        <div class="eventos-grid">
+          <app-evento-card *ngFor="let evento of eventosEquipoFavorito" [evento]="evento"></app-evento-card>
+        </div>
+      </div>
     </div>
   </ng-container>
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -10,7 +11,10 @@ export class NotificationComponent {
   @Input() type: 'success' | 'error' | 'info' = 'info';
   @Input() duration: number = 10000; // ms
   @Input() show: boolean = false;
+  @Input() actionButton?: { text: string; route: string };
   @Output() closed = new EventEmitter<void>();
+
+  constructor(private router: Router) {}
 
   ngOnChanges() {
     if (this.show && this.duration > 0) {
@@ -22,5 +26,12 @@ export class NotificationComponent {
 
   close() {
     this.closed.emit();
+  }
+
+  handleAction() {
+    if (this.actionButton?.route) {
+      this.router.navigate([this.actionButton.route]);
+      this.close();
+    }
   }
 } 

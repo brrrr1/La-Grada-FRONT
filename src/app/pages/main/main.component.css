@@ -55,17 +55,29 @@ h1 {
   letter-spacing: -1px;
 }
 
-.equipos-grid {
+.equipos-outer, .eventos-outer {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #fff #141e30;
+}
+
+.equipos-scroll, .eventos-scroll {
+  width: 100%;
+  min-width: min-content;
+}
+
+.equipos-grid, .eventos-grid {
   display: flex;
   flex-direction: row;
   gap: 3.5rem 2.5rem;
-  overflow: visible !important;
   padding-bottom: 1.5rem;
   margin-top: 2.5rem;
   justify-content: flex-start;
   flex-wrap: nowrap;
-  scrollbar-width: thin;
-  scrollbar-color: #fff #141e30;
 }
 
 .equipo-card {
@@ -140,26 +152,6 @@ h1 {
   margin-bottom: 1.5rem;
   margin-top: 3.5rem;
   letter-spacing: -1px;
-}
-
-.equipos-outer, .equipos-scroll {
-  width: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding-bottom: 2.5rem;
-}
-
-.equipos-grid, .eventos-grid {
-  display: flex;
-  flex-direction: row;
-  gap: 3.5rem 2.5rem;
-  overflow: visible !important;
-  padding-bottom: 1.5rem;
-  margin-top: 2.5rem;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  scrollbar-width: thin;
-  scrollbar-color: #fff #141e30;
 }
 
 .evento-card {

@@ -97,4 +97,8 @@ export class EventoService {
   getEntradasPasadasUsuario(): Observable<GetEntradaDto[]> {
     return this.http.get<GetEntradaDto[]>(`${BASE_URL}/user/entradas/pasadas`);
   }
+
+  getProximosEventosEquipoFavorito(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/user/favorite-team-events`);
+  }
 }
