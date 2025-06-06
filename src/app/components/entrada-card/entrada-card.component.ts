@@ -24,4 +24,11 @@ export class EntradaCardComponent {
   closeModal() {
     this.isModalOpen = false;
   }
+
+  downloadQr() {
+    const link = document.createElement('a');
+    link.href = 'data:image/png;base64,' + this.entrada.qrBase64;
+    link.download = `qr-entrada-${this.entrada.id || ''}.png`;
+    link.click();
+  }
 } 

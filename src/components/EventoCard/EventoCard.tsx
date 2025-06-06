@@ -40,20 +40,20 @@ const EventoCard: React.FC<EventoCardProps> = ({ evento }) => {
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="evento-card-modal">
-          <div className="evento-nombre">{evento.nombre}</div>
-          <div className="evento-escudos">
-            {evento.escudo1Url && (
-              <img src={evento.escudo1Url} alt={`${evento.equipo1.nombre} escudo`} className="evento-escudo" />
-            )}
-            <span className="evento-vs">vs</span>
-            {evento.escudo2Url && (
-              <img src={evento.escudo2Url} alt={`${evento.equipo2.nombre} escudo`} className="evento-escudo" />
-            )}
-          </div>
-        </div>
+    <div className="evento-nombre">{evento.nombre}</div>
+    <div className="evento-escudos">
+      {evento.escudo1Url && (
+        <img src={evento.escudo1Url} alt={`${evento.equipo1.nombre} escudo`} className="evento-escudo" />
+      )}
+      <span className="evento-vs">vs</span>
+      {evento.escudo2Url && (
+        <img src={evento.escudo2Url} alt={`${evento.equipo2.nombre} escudo`} className="evento-escudo" />
+      )}
+    </div>
+  </div>
       </Modal>
     </>
-  );
+);
 };
 
 export default EventoCard; 

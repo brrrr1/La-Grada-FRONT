@@ -60,11 +60,11 @@
 
 .evento-vs {
   font-weight: bold;
-  color: #666;
+  color: #fff;
 }
 
 .evento-fecha {
-  color: #666;
+  color: #fff;
   font-size: 0.9rem;
 }
 
@@ -166,6 +166,7 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  cursor: pointer;
 }
 
 @keyframes fadeIn {
@@ -186,4 +187,29 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.entrada-fondo-blur-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.entrada-fondo-blur-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.0) 80%);
+}
+
+.entrada-card::after,
+.entrada-card-modal::after {
+  content: none;
 } 
