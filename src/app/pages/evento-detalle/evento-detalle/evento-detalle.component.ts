@@ -176,4 +176,11 @@ export class EventoDetalleComponent implements OnInit {
   hideNotification() {
     this.notification.show = false;
   }
+
+  buscarEnYoutube() {
+    if (this.evento) {
+      const searchQuery = encodeURIComponent(`${this.evento.nombre} resumen`);
+      window.open(`https://www.youtube.com/results?search_query=${searchQuery}`, '_blank');
+    }
+  }
 }
