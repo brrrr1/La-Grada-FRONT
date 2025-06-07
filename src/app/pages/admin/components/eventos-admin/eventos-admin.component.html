@@ -1,0 +1,70 @@
+<div class="eventos-admin-container">
+  <div class="eventos-header">
+    <h2>Gestión de Eventos</h2>
+    <div class="action-buttons">
+      <button class="action-btn add">
+        Añadir Evento
+      </button>
+      <button class="action-btn edit">
+        Editar Evento
+      </button>
+      <button class="action-btn delete" [class.delete-mode]="deleteMode" (click)="onEliminarClick()">
+        {{ deleteMode ? 'Cancelar' : 'Eliminar Evento' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div *ngIf="loading" class="loading">
+      Cargando eventos...
+    </div>
+
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+
+    <table *ngIf="!loading && !error">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha y Hora</th>
+          <th>Equipo 1</th>
+          <th>Equipo 2</th>
+          <th>Entradas Restantes</th>
+          <th>Entradas Totales</th>
+          <th>Precio</th>
+          <th>Tipo de Evento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let evento of eventos"
+            [class.selectable]="deleteMode"
+            [class.selected]="isEventoSeleccionado(evento)"
+            (click)="seleccionarEvento(evento)">
+          <td>{{ evento.id }}</td>
+          <td>{{ evento.nombre }}</td>
+          <td>{{ evento.descripcion }}</td>
+          <td>{{ evento.fechaYHora }}</td>
+          <td>{{ evento.equipo1?.nombre }}</td>
+          <td>{{ evento.equipo2?.nombre }}</td>
+          <td>{{ evento.entradasRestantes }}</td>
+          <td>{{ evento.entradasTotales }}</td>
+          <td>{{ evento.precio }}</td>
+          <td>{{ evento.tipoEvento }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-modal
+    *ngIf="showDeleteModal && eventoSeleccionado"
+    [titulo]="'Eliminar evento'"
+    [texto]="'¿Estás seguro de que quieres eliminar el evento ' + eventoSeleccionado.nombre + '?'"
+    [confirmText]="'Eliminar'"
+    [cancelText]="'Cancelar'"
+    (confirm)="onDeleteModalConfirm()"
+    (cancel)="onDeleteModalCancel()"
+  ></app-modal>
+</div> 

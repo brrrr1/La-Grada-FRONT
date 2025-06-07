@@ -117,4 +117,12 @@ export class EventoService {
   getProximosEventosEquipoFavorito(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`${BASE_URL}/user/favorite-team-events`);
   }
+
+  getAllEventos(): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`${BASE_URL}/evento/todos`);
+  }
+
+  deleteEvento(id: string) {
+    return this.http.delete(`${BASE_URL}/evento/${id}`);
+  }
 }
