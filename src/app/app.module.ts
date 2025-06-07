@@ -22,13 +22,14 @@ import { EventoCardComponent } from './components/evento-card/evento-card.compon
 import { EventosListComponent } from './pages/eventos-list/eventos-list.component';
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
-import { ModalComponent } from './components/modal/modal/modal.component';
-import { ProfileModule } from './pages/profile/profile.module';
 import { NotificationComponent } from './components/notification/notification.component';
 import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
 import { HistorialComponent } from './pages/historial/historial.component';
 import { EntradaCardComponent } from './components/entrada-card/entrada-card.component';
 import { AboutComponent } from './components/about/about.component';
+import { AdminModule } from './pages/admin/admin.module';
+import { SharedModule } from './components/modal/modal/shared.module';
+import { ProfileModule } from './pages/profile/profile.module';
 
 @NgModule({
   declarations: [
@@ -42,10 +43,9 @@ import { AboutComponent } from './components/about/about.component';
     EquipoCardComponent,
     EquiposListComponent,
     EventoCardComponent,
+    EventosListComponent,
     EquipoDetalleComponent,
     EventoDetalleComponent,
-    ModalComponent,
-    EventosListComponent,
     NotificationComponent,
     EntradasListComponent,
     HistorialComponent,
@@ -58,7 +58,9 @@ import { AboutComponent } from './components/about/about.component';
     FormsModule,
     HttpClientModule,
     ProfileModule,
-    CommonModule
+    CommonModule,
+    AdminModule,
+    SharedModule
   ],
   providers: [
     provideAnimationsAsync(),

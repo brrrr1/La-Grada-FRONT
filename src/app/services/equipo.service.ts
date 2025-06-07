@@ -34,4 +34,8 @@ export class EquipoService {
   getEquipoById(id: string): Observable<Equipo> {
     return this.http.get<Equipo>(`${BASE_URL}/equipo/${id}`);
   }
+
+  deleteEquipo(id: string): Observable<void> {
+    return this.http.delete<void>(`${BASE_URL}/equipo/${id}`);
+  }
 }

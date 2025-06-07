@@ -12,6 +12,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
 import { HistorialComponent } from './pages/historial/historial.component';
 import { AboutComponent } from './components/about/about.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: 'perfil', component: ProfileComponent },
   { path: 'entradas', component: EntradasListComponent },
   { path: 'historial', component: HistorialComponent },
-  { path: 'sobre-nosotros', component: AboutComponent }
+  { path: 'sobre-nosotros', component: AboutComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({

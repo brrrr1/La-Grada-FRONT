@@ -33,6 +33,7 @@
       <li><a routerLink="/equipos" (click)="toggleMenu()">Equipos</a></li>
       <li><a routerLink="/eventos" (click)="toggleMenu()">Eventos</a></li>
       <li><a routerLink="/sobre-nosotros" (click)="toggleMenu()">Sobre Nosotros</a></li>
+      <li *ngIf="isAdmin"><a routerLink="/admin" (click)="toggleMenu()">Administración</a></li>
     </ul>
   </div>
 </div>

@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
   menuOpen = false;
   userName: string | null = null;
   userMenuOpen: boolean = false;
+  isAdmin: boolean = false;
 
   // Modal logout
   showLogoutModal = false;
@@ -34,8 +35,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.loadUserName();
+    this.checkIsAdmin();
     this.auth.userChanged$.subscribe(() => {
       this.loadUserName();
+      this.checkIsAdmin();
     });
   }
 
@@ -100,4 +103,21 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([route]);
     this.closeUserMenu();
   }
+
+  checkIsAdmin = async () => {
+    try {
+      const token = this.auth.getToken();
+      if (!token) {
+        this.isAdmin = false;
+        return;
+      }
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      });
+      const response = await this.http.get(`${BASE_URL}/me/admin`, { headers }).toPromise();
+      this.isAdmin = true;
+    } catch (error) {
+      this.isAdmin = false;
+    }
+  };
 }

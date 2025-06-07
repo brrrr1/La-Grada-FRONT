@@ -1,0 +1,58 @@
+<div class="equipos-admin-container">
+  <div class="equipos-header">
+    <h2>Gestión de Equipos</h2>
+    <div class="action-buttons">
+      <button class="action-btn add">
+        Añadir Equipo
+      </button>
+      <button class="action-btn edit">
+        Editar Equipo
+      </button>
+      <button class="action-btn delete" [class.delete-mode]="deleteMode" (click)="onEliminarClick()">
+        {{ deleteMode ? 'Cancelar' : 'Eliminar Equipo' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <div *ngIf="loading" class="loading">
+      Cargando equipos...
+    </div>
+
+    <div *ngIf="error" class="error">
+      {{ error }}
+    </div>
+
+    <table *ngIf="!loading && !error">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Escudo</th>
+          <th>Fondo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipo of equipos"
+            [class.selectable]="deleteMode"
+            [class.selected]="isEquipoSeleccionado(equipo)"
+            (click)="seleccionarEquipo(equipo)">
+          <td>{{ equipo.id }}</td>
+          <td>{{ equipo.nombre }}</td>
+          <td>{{ equipo.fotoEscudo }}</td>
+          <td>{{ equipo.fotoFondo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-modal
+    *ngIf="showDeleteModal && equipoSeleccionado"
+    [titulo]="'Eliminar equipo'"
+    [texto]="'¿Estás seguro de que quieres eliminar el equipo ' + equipoSeleccionado.nombre + '?'"
+    [confirmText]="'Eliminar'"
+    [cancelText]="'Cancelar'"
+    (confirm)="onDeleteModalConfirm()"
+    (cancel)="onDeleteModalCancel()"
+  ></app-modal>
+</div> 

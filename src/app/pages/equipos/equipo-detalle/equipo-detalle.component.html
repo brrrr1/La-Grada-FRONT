@@ -25,12 +25,11 @@
   </div>
   <div class="equipo-detalle-content">
     <div class="escudo-col">
-      <img *ngIf="escudoUrl" [src]="escudoUrl" [alt]="equipo?.nombre + ' escudo'" class="escudo-grande" />
+      <img *ngIf="escudoUrl" [src]="escudoUrl" [alt]="equipo.nombre + ' escudo'" class="escudo-grande" />
     </div>
     <div class="info-col">
       <div class="nombre-heart-row">
-        <h2 class="nombre-equipo">{{ equipo?.nombre }}
-        </h2>
+        <h2 class="nombre-equipo">{{ equipo.nombre }}</h2>
         <div class="heart-container" title="Like" (click)="onHeartClick()">
           <div class="svg-container">
             <svg *ngIf="!esFavorito" viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">
