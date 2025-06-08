@@ -7,12 +7,14 @@ import { EquiposAdminComponent } from './components/equipos-admin/equipos-admin.
 import { EventosAdminComponent } from './components/eventos-admin/eventos-admin.component';
 import { NotificationModule } from '../../components/notification/notification.module';
 import { SharedModule } from '../../components/modal/modal/shared.module';
+import { UsuariosAdminComponent } from './components/usuarios-admin/usuarios-admin.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     EquiposAdminComponent,
-    EventosAdminComponent
+    EventosAdminComponent,
+    UsuariosAdminComponent
   ],
   imports: [
     CommonModule,

@@ -104,21 +104,34 @@ export class EventosAdminComponent implements OnInit {
   }
 
   onEliminarClick() {
-    this.deleteMode = !this.deleteMode;
-    if (!this.deleteMode) {
+    if (this.deleteMode) {
+      this.deleteMode = false;
+      this.eventoSeleccionado = null;
+    } else {
+      this.deleteMode = true;
+      this.editMode = false;
+      this.showCreateModal = false;
       this.eventoSeleccionado = null;
     }
   }
 
   onEditarClick() {
-    this.editMode = !this.editMode;
-    if (!this.editMode) {
+    if (this.editMode) {
+      this.editMode = false;
+      this.eventoSeleccionado = null;
+    } else {
+      this.editMode = true;
+      this.deleteMode = false;
+      this.showCreateModal = false;
       this.eventoSeleccionado = null;
     }
   }
 
   onAddClick() {
     this.showCreateModal = true;
+    this.deleteMode = false;
+    this.editMode = false;
+    this.eventoSeleccionado = null;
     this.eventoForm.reset();
   }
 
