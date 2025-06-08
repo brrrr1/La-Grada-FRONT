@@ -111,7 +111,6 @@ export class EventoDetalleComponent implements OnInit {
     this.hideNotification();
     this.eventoService.buyTicket(this.evento.id).subscribe({
       next: () => {
-        // Actualizar estado local
         this.evento!.entradasRestantes--;
         if (this.usuarioId) {
           this.evento!.entradas.push({

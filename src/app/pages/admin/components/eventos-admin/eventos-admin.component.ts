@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventoService, Evento } from '../../../../services/evento.service';
+import { EquipoService } from '../../../../services/equipo.service';
+import { Equipo } from '../../../../models/equipo.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-eventos-admin',
@@ -8,17 +11,38 @@ import { EventoService, Evento } from '../../../../services/evento.service';
 })
 export class EventosAdminComponent implements OnInit {
   eventos: Evento[] = [];
+  equipos: Equipo[] = [];
   loading: boolean = true;
   error: string | null = null;
 
   deleteMode: boolean = false;
+  editMode: boolean = false;
   eventoSeleccionado: Evento | null = null;
   showDeleteModal: boolean = false;
+  showEditModal: boolean = false;
 
-  constructor(private eventoService: EventoService) {}
+  eventoForm: FormGroup;
+
+  constructor(
+    private eventoService: EventoService,
+    private equipoService: EquipoService,
+    private fb: FormBuilder
+  ) {
+    this.eventoForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      fechaYHora: ['', Validators.required],
+      equipo1Id: ['', Validators.required],
+      equipo2Id: ['', Validators.required],
+      entradasTotales: [0, [Validators.required, Validators.min(1)]],
+      precio: [0, [Validators.required, Validators.min(0)]],
+      tipo: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.loadEventos();
+    this.loadEquipos();
   }
 
   loadEventos(): void {
@@ -36,9 +60,27 @@ export class EventosAdminComponent implements OnInit {
     });
   }
 
+  loadEquipos(): void {
+    this.equipoService.getEquipos().subscribe({
+      next: (data) => {
+        this.equipos = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar equipos:', error);
+      }
+    });
+  }
+
   onEliminarClick() {
     this.deleteMode = !this.deleteMode;
     if (!this.deleteMode) {
+      this.eventoSeleccionado = null;
+    }
+  }
+
+  onEditarClick() {
+    this.editMode = !this.editMode;
+    if (!this.editMode) {
       this.eventoSeleccionado = null;
     }
   }
@@ -47,6 +89,19 @@ export class EventosAdminComponent implements OnInit {
     if (this.deleteMode) {
       this.eventoSeleccionado = evento;
       this.showDeleteModal = true;
+    } else if (this.editMode) {
+      this.eventoSeleccionado = evento;
+      this.eventoForm.patchValue({
+        nombre: evento.nombre,
+        descripcion: evento.descripcion,
+        fechaYHora: evento.fechaYHora,
+        equipo1Id: evento.equipo1?.id,
+        equipo2Id: evento.equipo2?.id,
+        entradasTotales: evento.entradasTotales,
+        precio: evento.precio,
+        tipo: evento.tipoEvento
+      });
+      this.showEditModal = true;
     }
   }
 
@@ -74,6 +129,32 @@ export class EventosAdminComponent implements OnInit {
 
   onDeleteModalCancel() {
     this.showDeleteModal = false;
+    this.eventoSeleccionado = null;
+  }
+
+  onEditModalConfirm() {
+    if (this.eventoForm.valid && this.eventoSeleccionado) {
+      const eventoData = this.eventoForm.value;
+      this.eventoService.updateEvento(this.eventoSeleccionado.id, eventoData).subscribe({
+        next: (updatedEvento) => {
+          const index = this.eventos.findIndex(e => e.id === updatedEvento.id);
+          if (index !== -1) {
+            this.eventos[index] = updatedEvento;
+          }
+          this.showEditModal = false;
+          this.editMode = false;
+          this.eventoSeleccionado = null;
+        },
+        error: (error) => {
+          this.error = 'No se pudo actualizar el evento.';
+          console.error('Error:', error);
+        }
+      });
+    }
+  }
+
+  onEditModalCancel() {
+    this.showEditModal = false;
     this.eventoSeleccionado = null;
   }
 } 

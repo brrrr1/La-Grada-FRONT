@@ -11,6 +11,10 @@ export interface Equipo {
   fotoFondo: string;
 }
 
+export interface CreateEquipoDto {
+  nombre: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -33,5 +37,19 @@ export class EquipoService {
 
   getEquipoById(id: string): Observable<Equipo> {
     return this.http.get<Equipo>(`${BASE_URL}/equipo/${id}`);
+  }
+
+  updateEquipo(id: string, equipo: CreateEquipoDto, escudoFile?: File, fondoFile?: File): Observable<Equipo> {
+    const formData = new FormData();
+    formData.append('equipo', new Blob([JSON.stringify(equipo)], { type: 'application/json' }));
+    
+    if (escudoFile) {
+      formData.append('file', escudoFile);
+    }
+    if (fondoFile) {
+      formData.append('file2', fondoFile);
+    }
+
+    return this.http.put<Equipo>(`${BASE_URL}/equipo/${id}`, formData);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { EquipoService } from '../../../../services/equipo.service';
-import { Equipo } from '../../../../models/equipo.model';
+import { EquipoService, Equipo, CreateEquipoDto } from '../../../../services/equipo.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-equipos-admin',
@@ -13,10 +13,25 @@ export class EquiposAdminComponent implements OnInit {
   error: string | null = null;
 
   deleteMode: boolean = false;
+  editMode: boolean = false;
   equipoSeleccionado: Equipo | null = null;
-  showDeleteModal: boolean = false;
+  showNotification: boolean = false;
+  notificationMessage: string = '';
+  notificationType: 'error' | 'success' | 'info' = 'error';
+  showEditModal: boolean = false;
 
-  constructor(private equipoService: EquipoService) {}
+  equipoForm: FormGroup;
+  escudoFile: File | null = null;
+  fondoFile: File | null = null;
+
+  constructor(
+    private equipoService: EquipoService,
+    private fb: FormBuilder
+  ) {
+    this.equipoForm = this.fb.group({
+      nombre: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.loadEquipos();
@@ -38,8 +53,12 @@ export class EquiposAdminComponent implements OnInit {
   }
 
   onEliminarClick() {
-    this.deleteMode = !this.deleteMode;
-    if (!this.deleteMode) {
+    this.showDeleteError();
+  }
+
+  onEditarClick() {
+    this.editMode = !this.editMode;
+    if (!this.editMode) {
       this.equipoSeleccionado = null;
     }
   }
@@ -47,7 +66,13 @@ export class EquiposAdminComponent implements OnInit {
   seleccionarEquipo(equipo: Equipo) {
     if (this.deleteMode) {
       this.equipoSeleccionado = equipo;
-      this.showDeleteModal = true;
+      this.showDeleteError();
+    } else if (this.editMode) {
+      this.equipoSeleccionado = equipo;
+      this.equipoForm.patchValue({
+        nombre: equipo.nombre
+      });
+      this.showEditModal = true;
     }
   }
 
@@ -55,15 +80,75 @@ export class EquiposAdminComponent implements OnInit {
     return this.equipoSeleccionado?.id === equipo.id;
   }
 
-  onDeleteModalConfirm() {
-    // Aquí irá la lógica de eliminación real
-    this.showDeleteModal = false;
-    this.deleteMode = false;
-    this.equipoSeleccionado = null;
+  showDeleteError() {
+    this.notificationMessage = 'No se pueden eliminar los equipos';
+    this.notificationType = 'error';
+    this.showNotification = true;
+    setTimeout(() => {
+      this.showNotification = false;
+    }, 3000);
   }
 
-  onDeleteModalCancel() {
-    this.showDeleteModal = false;
+  onEscudoFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.escudoFile = input.files[0];
+    }
+  }
+
+  onFondoFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.fondoFile = input.files[0];
+    }
+  }
+
+  onEditModalConfirm() {
+    if (this.equipoForm.valid && this.equipoSeleccionado) {
+      const equipoData: CreateEquipoDto = this.equipoForm.value;
+      
+      this.equipoService.updateEquipo(
+        this.equipoSeleccionado.id,
+        equipoData,
+        this.escudoFile || undefined,
+        this.fondoFile || undefined
+      ).subscribe({
+        next: (updatedEquipo) => {
+          const index = this.equipos.findIndex(e => e.id === updatedEquipo.id);
+          if (index !== -1) {
+            this.equipos[index] = updatedEquipo;
+          }
+          this.showEditModal = false;
+          this.editMode = false;
+          this.equipoSeleccionado = null;
+          this.escudoFile = null;
+          this.fondoFile = null;
+          this.showNotification = true;
+          this.notificationMessage = 'Equipo actualizado correctamente';
+          this.notificationType = 'success';
+          setTimeout(() => {
+            this.showNotification = false;
+          }, 3000);
+        },
+        error: (error) => {
+          this.error = 'Error al actualizar el equipo';
+          console.error('Error:', error);
+          this.showNotification = true;
+          this.notificationMessage = 'Error al actualizar el equipo';
+          this.notificationType = 'error';
+          setTimeout(() => {
+            this.showNotification = false;
+          }, 3000);
+        }
+      });
+    }
+  }
+
+  onEditModalCancel() {
+    this.showEditModal = false;
     this.equipoSeleccionado = null;
+    this.escudoFile = null;
+    this.fondoFile = null;
+    this.equipoForm.reset();
   }
 } 

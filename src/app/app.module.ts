@@ -22,7 +22,6 @@ import { EventoCardComponent } from './components/evento-card/evento-card.compon
 import { EventosListComponent } from './pages/eventos-list/eventos-list.component';
 import { EquipoDetalleComponent } from './pages/equipos/equipo-detalle/equipo-detalle.component';
 import { EventoDetalleComponent } from './pages/evento-detalle/evento-detalle/evento-detalle.component';
-import { NotificationComponent } from './components/notification/notification.component';
 import { EntradasListComponent } from './pages/entradas/entradas-list/entradas-list.component';
 import { HistorialComponent } from './pages/historial/historial.component';
 import { EntradaCardComponent } from './components/entrada-card/entrada-card.component';
@@ -30,6 +29,7 @@ import { AboutComponent } from './components/about/about.component';
 import { AdminModule } from './pages/admin/admin.module';
 import { SharedModule } from './components/modal/modal/shared.module';
 import { ProfileModule } from './pages/profile/profile.module';
+import { NotificationModule } from './components/notification/notification.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,6 @@ import { ProfileModule } from './pages/profile/profile.module';
     EventosListComponent,
     EquipoDetalleComponent,
     EventoDetalleComponent,
-    NotificationComponent,
     EntradasListComponent,
     HistorialComponent,
     EntradaCardComponent,
@@ -60,7 +59,8 @@ import { ProfileModule } from './pages/profile/profile.module';
     ProfileModule,
     CommonModule,
     AdminModule,
-    SharedModule
+    SharedModule,
+    NotificationModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -28,7 +28,6 @@ export class NavbarComponent implements OnInit {
   userMenuOpen: boolean = false;
   isAdmin: boolean = false;
 
-  // Modal logout
   showLogoutModal = false;
 
   constructor(public auth: AuthService, private router: Router, private http: HttpClient) {}

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NotificationComponent {
   @Input() message: string = '';
   @Input() type: 'success' | 'error' | 'info' = 'info';
-  @Input() duration: number = 10000; // ms
+  @Input() duration: number = 10000; 
   @Input() show: boolean = false;
   @Input() actionButton?: { text: string; route: string };
   @Output() closed = new EventEmitter<void>();

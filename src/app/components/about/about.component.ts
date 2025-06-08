@@ -20,9 +20,7 @@ export class AboutComponent {
   @HostListener('window:scroll', ['$event'])
   onScroll() {
     const scrollPosition = window.scrollY;
-    const maxScroll = 300; // Adjust this value to control when the animation completes
-    
-    // Calculate scale and opacity based on scroll position
+    const maxScroll = 300;
     this.logoScale = Math.min(2, 1 + (scrollPosition / maxScroll));
     this.logoOpacity = Math.max(0, 1 - (scrollPosition / maxScroll));
   }
@@ -30,7 +28,7 @@ export class AboutComponent {
   openGallery(index: number) {
     this.currentImageIndex = index;
     this.showGallery = true;
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when gallery is open
+    document.body.style.overflow = 'hidden';
   }
 
   closeGallery() {
@@ -46,7 +44,6 @@ export class AboutComponent {
     this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
   }
 
-  // Handle keyboard navigation
   handleKeydown(event: KeyboardEvent) {
     if (!this.showGallery) return;
     

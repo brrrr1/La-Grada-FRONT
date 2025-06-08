@@ -42,7 +42,7 @@ export interface GetEntradaDto {
   usuarioNombre: string;
   usuarioApellidos: string;
   usuarioCorreo: string;
-  evento: any; // Puedes tipar mejor si tienes el modelo
+  evento: any;
   qrBase64: string;
 }
 
@@ -124,5 +124,9 @@ export class EventoService {
 
   deleteEvento(id: string) {
     return this.http.delete(`${BASE_URL}/evento/${id}`);
+  }
+
+  updateEvento(id: string, eventoData: any): Observable<Evento> {
+    return this.http.put<Evento>(`${BASE_URL}/evento/${id}`, eventoData);
   }
 }

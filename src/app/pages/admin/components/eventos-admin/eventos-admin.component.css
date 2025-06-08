@@ -61,9 +61,21 @@
   animation: pulseDelete 0.7s infinite alternate;
 }
 
+.action-btn.edit.edit-mode {
+  background: #ffc107;
+  color: #000;
+  box-shadow: 0 0 8px 2px rgba(255,193,7,0.25);
+  animation: pulseEdit 0.7s infinite alternate;
+}
+
 @keyframes pulseDelete {
   from { box-shadow: 0 0 8px 2px rgba(244,67,54,0.25); }
   to { box-shadow: 0 0 16px 4px rgba(244,67,54,0.45); }
+}
+
+@keyframes pulseEdit {
+  from { box-shadow: 0 0 8px 2px rgba(255,193,7,0.25); }
+  to { box-shadow: 0 0 16px 4px rgba(255,193,7,0.45); }
 }
 
 .table-container {
@@ -112,6 +124,10 @@ tr.selected {
   color: #fff;
 }
 
+tr.selectable.edit-hover:hover {
+  background: rgba(255, 193, 7, 0.10);
+}
+
 .loading, .error {
   text-align: center;
   padding: 2rem;
@@ -140,4 +156,65 @@ tr.selected {
   th, td {
     padding: 0.8rem;
   }
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #fff;
+  padding: 0.8rem;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-group input[type="number"] {
+  width: 150px;
+}
+
+.form-group input[type="datetime-local"] {
+  width: 250px;
+}
+
+.form-group select {
+  cursor: pointer;
+}
+
+.form-group select option {
+  background: #1a1a1a;
+  color: #fff;
 } 
