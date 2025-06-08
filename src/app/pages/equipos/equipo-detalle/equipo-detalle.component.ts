@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EquipoService, Equipo } from '../../../services/equipo.service';
 import { AuthService } from '../../../services/auth.service';
@@ -288,6 +288,11 @@ export class EquipoDetalleComponent implements OnInit {
 
   guardarNombre(nuevoNombre: string) {
     if (!this.equipo) return;
+    if (!nuevoNombre || nuevoNombre.trim() === '') {
+      alert('El nombre del equipo no puede estar vacío.');
+      this.editandoNombre = false;
+      return;
+    }
     this.equipoService.updateEquipo(this.equipo.id, { nombre: nuevoNombre }, undefined, undefined).subscribe({
       next: (updated) => {
         this.equipo = { ...this.equipo!, nombre: updated.nombre };
@@ -316,5 +321,12 @@ export class EquipoDetalleComponent implements OnInit {
         this.editandoFondo = false;
       }
     });
+  }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onKeydownEscape(event: KeyboardEvent) {
+    if (this.modoEdicion) {
+      this.cancelarModoEdicion();
+    }
   }
 }
