@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EquipoService, Equipo } from '../../../services/equipo.service';
 import { AuthService } from '../../../services/auth.service';
@@ -36,6 +36,13 @@ export class EquipoDetalleComponent implements OnInit {
   accionFavorito: 'quitar' | 'cambiar' | 'elegir' | null = null;
   equipoFavoritoNombre: string | null = null;
   mostrarModal: boolean = false;
+  esAdmin: boolean = false;
+  modoEdicion: boolean = false;
+  editandoNombre: boolean = false;
+  editandoEscudo: boolean = false;
+  editandoFondo: boolean = false;
+  @ViewChild('inputEscudo') inputEscudo!: ElementRef<HTMLInputElement>;
+  @ViewChild('inputFondo') inputFondo!: ElementRef<HTMLInputElement>;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +52,8 @@ export class EquipoDetalleComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.checkIsAdmin();
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.equipoService.getEquipoById(id).subscribe({
@@ -64,6 +72,21 @@ export class EquipoDetalleComponent implements OnInit {
     } else {
       this.errorMsg = 'ID de equipo no válido';
       this.loading = false;
+    }
+  }
+
+  async checkIsAdmin() {
+    const token = this.auth.getToken();
+    if (!token) {
+      this.esAdmin = false;
+      return;
+    }
+    const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+    try {
+      await this.http.get('http://localhost:8080/me/admin', { headers }).toPromise();
+      this.esAdmin = true;
+    } catch {
+      this.esAdmin = false;
     }
   }
 
@@ -230,6 +253,67 @@ export class EquipoDetalleComponent implements OnInit {
     this.auth.changeFavoriteTeam(this.equipo.id).subscribe({
       next: () => {
         this.comprobarFavorito();
+      }
+    });
+  }
+
+  activarModoEdicion() {
+    this.modoEdicion = true;
+  }
+
+  cancelarModoEdicion() {
+    this.modoEdicion = false;
+    this.editandoNombre = false;
+    this.editandoEscudo = false;
+    this.editandoFondo = false;
+  }
+
+  activarEdicionNombre() {
+    this.editandoNombre = true;
+  }
+
+  activarEdicionEscudo() {
+    if (this.inputEscudo) {
+      this.inputEscudo.nativeElement.value = '';
+      this.inputEscudo.nativeElement.click();
+    }
+  }
+
+  activarEdicionFondo() {
+    if (this.inputFondo) {
+      this.inputFondo.nativeElement.value = '';
+      this.inputFondo.nativeElement.click();
+    }
+  }
+
+  guardarNombre(nuevoNombre: string) {
+    if (!this.equipo) return;
+    this.equipoService.updateEquipo(this.equipo.id, { nombre: nuevoNombre }, undefined, undefined).subscribe({
+      next: (updated) => {
+        this.equipo = { ...this.equipo!, nombre: updated.nombre };
+        this.editandoNombre = false;
+      }
+    });
+  }
+
+  guardarEscudo(file: File) {
+    if (!this.equipo) return;
+    this.equipoService.updateEquipo(this.equipo.id, { nombre: this.equipo.nombre }, file, undefined).subscribe({
+      next: (updated) => {
+        this.equipo = { ...this.equipo!, fotoEscudo: updated.fotoEscudo };
+        this.loadImages();
+        this.editandoEscudo = false;
+      }
+    });
+  }
+
+  guardarFondo(file: File) {
+    if (!this.equipo) return;
+    this.equipoService.updateEquipo(this.equipo.id, { nombre: this.equipo.nombre }, undefined, file).subscribe({
+      next: (updated) => {
+        this.equipo = { ...this.equipo!, fotoFondo: updated.fotoFondo };
+        this.loadImages();
+        this.editandoFondo = false;
       }
     });
   }

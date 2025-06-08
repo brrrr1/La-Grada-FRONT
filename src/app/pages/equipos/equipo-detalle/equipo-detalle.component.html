@@ -1,6 +1,13 @@
 <div class="equipo-detalle-container" *ngIf="!loading && equipo; else loadingOrError">
+  <div class="equipo-detalle-header-row">
+    <ng-container *ngIf="esAdmin">
+      <button class="edit-btn" *ngIf="!modoEdicion" (click)="activarModoEdicion()">Editar</button>
+      <button class="edit-btn cancel" *ngIf="modoEdicion" (click)="cancelarModoEdicion()">Cancelar</button>
+    </ng-container>
+  </div>
   <div class="banner-fondo" *ngIf="fondoUrl">
-    <img [src]="fondoUrl" alt="Fondo estadio" class="banner-img" />
+    <img [src]="fondoUrl" alt="Fondo estadio" class="banner-img fondo-editable" [class.editable-anim]="modoEdicion" (click)="modoEdicion && activarEdicionFondo()" />
+    <input #inputFondo type="file" accept="image/*" style="display:none" (change)="guardarFondo($any($event.target).files[0])" />
     <div class="banner-gradient-overlay"></div>
     <div class="banner-heart-btn">
       <div class="heart-container" title="Like" (click)="onHeartClick()">
@@ -25,11 +32,23 @@
   </div>
   <div class="equipo-detalle-content">
     <div class="escudo-col">
-      <img *ngIf="escudoUrl" [src]="escudoUrl" [alt]="equipo.nombre + ' escudo'" class="escudo-grande" />
+      <img *ngIf="escudoUrl" [src]="escudoUrl" [alt]="equipo.nombre + ' escudo'" class="escudo-grande escudo-editable" [class.editable-anim]="modoEdicion" (click)="modoEdicion && activarEdicionEscudo()" />
+      <input #inputEscudo type="file" accept="image/*" style="display:none" (change)="guardarEscudo($any($event.target).files[0])" />
     </div>
     <div class="info-col">
       <div class="nombre-heart-row">
-        <h2 class="nombre-equipo">{{ equipo.nombre }}</h2>
+        <ng-container *ngIf="!modoEdicion || !editandoNombre">
+          <h2 class="nombre-equipo nombre-editable" [class.editable-anim]="modoEdicion" (click)="modoEdicion && activarEdicionNombre()">{{ equipo.nombre }}</h2>
+          <ng-container *ngIf="esAdmin">
+            <button class="edit-btn small" *ngIf="!modoEdicion" (click)="activarModoEdicion()">Editar</button>
+            <button class="edit-btn small cancel" *ngIf="modoEdicion" (click)="cancelarModoEdicion()">Volver</button>
+            <label *ngIf="modoEdicion" for="input-fondo" class="label-fondo">Foto de fondo:</label>
+            <input *ngIf="modoEdicion" id="input-fondo" type="file" accept="image/*" class="input-edit-file-fondo-inline" (change)="guardarFondo($any($event.target).files[0])" />
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="modoEdicion && editandoNombre">
+          <input class="input-edit-nombre" [value]="equipo.nombre" (keydown.enter)="guardarNombre($any($event.target).value)" (blur)="guardarNombre($any($event.target).value)" autofocus />
+        </ng-container>
         <div class="heart-container" title="Like" (click)="onHeartClick()">
           <div class="svg-container">
             <svg *ngIf="!esFavorito" viewBox="0 0 24 24" class="svg-outline" xmlns="http://www.w3.org/2000/svg">

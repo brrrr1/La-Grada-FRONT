@@ -115,4 +115,21 @@ export class AuthService {
   notifyUserChanged() {
     this.userChanged$.next();
   }
+
+  isAdmin(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+    try {
+      const decoded: any = jwtDecode(token);
+      const roles = decoded.roles || decoded.authorities || [];
+      if (Array.isArray(roles)) {
+        return roles.includes('ADMIN');
+      } else if (typeof roles === 'string') {
+        return roles === 'ADMIN';
+      }
+      return false;
+    } catch {
+      return false;
+    }
+  }
 }
