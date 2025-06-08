@@ -49,34 +49,34 @@ h1 {
   color: #fff;
   font-size: 2.2rem;
   font-weight: 800;
-  margin-left: 0.5rem;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
   margin-bottom: 0 !important;
   letter-spacing: -1px;
 }
 
-.equipos-outer, .eventos-outer {
-  width: 100%;
+.equipos-outer {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  margin-left: -4rem;
+  width: calc(100% + 8rem);
   overflow-x: auto;
-  overflow-y: hidden;
-  padding-bottom: 2.5rem;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
   scrollbar-color: #fff #141e30;
 }
 
-.equipos-scroll, .eventos-scroll {
+.equipos-scroll {
   width: 100%;
   min-width: min-content;
 }
 
-.equipos-grid, .eventos-grid {
+.equipos-grid {
   display: flex;
   flex-direction: row;
   gap: 3.5rem 2.5rem;
-  padding-bottom: 1.5rem;
-  margin-top: 2.5rem;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
+  padding: 12px 0;
+  min-width: min-content;
 }
 
 .equipo-card {
@@ -155,9 +155,10 @@ h1 {
 }
 
 .eventos-outer {
-  padding-left: 2rem;
-  margin-left: -2rem;
-  width: calc(100% + 9.1rem);
+  padding-left: 4rem;
+  padding-right: 4rem;
+  margin-left: -4rem;
+  width: calc(100% + 8rem);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
