@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const BASE_URL = 'http://localhost:8080';
@@ -44,6 +44,17 @@ export interface GetEntradaDto {
   usuarioCorreo: string;
   evento: any;
   qrBase64: string;
+}
+
+export interface CreateEventoDto {
+  nombre: string;
+  descripcion: string;
+  fechaYHora: string;
+  equipo1Id: string;
+  equipo2Id: string;
+  entradasTotales: number;
+  precio: number;
+  tipo: string;
 }
 
 @Injectable({
@@ -128,5 +139,10 @@ export class EventoService {
 
   updateEvento(id: string, eventoData: any): Observable<Evento> {
     return this.http.put<Evento>(`${BASE_URL}/evento/${id}`, eventoData);
+  }
+
+  createEvento(eventoData: CreateEventoDto): Observable<Evento> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<Evento>(`${BASE_URL}/evento`, eventoData, { headers });
   }
 }

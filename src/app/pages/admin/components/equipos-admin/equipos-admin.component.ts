@@ -19,6 +19,7 @@ export class EquiposAdminComponent implements OnInit {
   notificationMessage: string = '';
   notificationType: 'error' | 'success' | 'info' = 'error';
   showEditModal: boolean = false;
+  showCreateModal: boolean = false;
 
   equipoForm: FormGroup;
   escudoFile: File | null = null;
@@ -61,6 +62,13 @@ export class EquiposAdminComponent implements OnInit {
     if (!this.editMode) {
       this.equipoSeleccionado = null;
     }
+  }
+
+  onAddClick() {
+    this.showCreateModal = true;
+    this.equipoForm.reset();
+    this.escudoFile = null;
+    this.fondoFile = null;
   }
 
   seleccionarEquipo(equipo: Equipo) {
@@ -147,6 +155,56 @@ export class EquiposAdminComponent implements OnInit {
   onEditModalCancel() {
     this.showEditModal = false;
     this.equipoSeleccionado = null;
+    this.escudoFile = null;
+    this.fondoFile = null;
+    this.equipoForm.reset();
+  }
+
+  onCreateModalConfirm() {
+    if (this.equipoForm.valid && this.escudoFile && this.fondoFile) {
+      const equipoData: CreateEquipoDto = this.equipoForm.value;
+      
+      this.equipoService.createEquipo(
+        equipoData,
+        this.escudoFile,
+        this.fondoFile
+      ).subscribe({
+        next: (newEquipo) => {
+          this.equipos.push(newEquipo);
+          this.showCreateModal = false;
+          this.escudoFile = null;
+          this.fondoFile = null;
+          this.equipoForm.reset();
+          this.showNotification = true;
+          this.notificationMessage = 'Equipo creado correctamente';
+          this.notificationType = 'success';
+          setTimeout(() => {
+            this.showNotification = false;
+          }, 3000);
+        },
+        error: (error) => {
+          this.error = 'Error al crear el equipo';
+          console.error('Error:', error);
+          this.showNotification = true;
+          this.notificationMessage = 'Error al crear el equipo';
+          this.notificationType = 'error';
+          setTimeout(() => {
+            this.showNotification = false;
+          }, 3000);
+        }
+      });
+    } else {
+      this.showNotification = true;
+      this.notificationMessage = 'Por favor, completa todos los campos obligatorios';
+      this.notificationType = 'error';
+      setTimeout(() => {
+        this.showNotification = false;
+      }, 3000);
+    }
+  }
+
+  onCreateModalCancel() {
+    this.showCreateModal = false;
     this.escudoFile = null;
     this.fondoFile = null;
     this.equipoForm.reset();

@@ -52,4 +52,13 @@ export class EquipoService {
 
     return this.http.put<Equipo>(`${BASE_URL}/equipo/${id}`, formData);
   }
+
+  createEquipo(equipo: CreateEquipoDto, escudoFile: File, fondoFile: File): Observable<Equipo> {
+    const formData = new FormData();
+    formData.append('equipo', new Blob([JSON.stringify(equipo)], { type: 'application/json' }));
+    formData.append('file', escudoFile);
+    formData.append('file2', fondoFile);
+
+    return this.http.post<Equipo>(`${BASE_URL}/equipo/`, formData);
+  }
 }
