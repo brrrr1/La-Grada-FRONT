@@ -119,12 +119,10 @@ th {
   transition: background 0.2s;
 }
 
-/* Hover rojo en modo deshabilitar */
 .usuarios-admin-container tr.selectable:hover {
   background: rgba(244, 67, 54, 0.08);
 }
 
-/* Hover verde en modo habilitar */
 .usuarios-admin-container.enable-mode tr.selectable:hover {
   background: rgba(76, 175, 80, 0.12);
 }
