@@ -8,7 +8,7 @@
       <button class="action-btn edit" [class.edit-mode]="editMode" (click)="onEditarClick()">
         {{ editMode ? 'Cancelar' : 'Editar Equipo' }}
       </button>
-      <button class="action-btn delete" [class.error]="showNotification" (click)="onEliminarClick()">
+      <button class="action-btn delete" [class.error]="showNotification && notificationType === 'error'" (click)="onEliminarClick()">
         Eliminar Equipo
       </button>
     </div>
