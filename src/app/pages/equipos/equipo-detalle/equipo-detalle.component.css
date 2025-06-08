@@ -96,13 +96,32 @@
   }
 }
 
+.proximos-eventos {
+  margin-top: 2rem;
+}
+
+.proximos-eventos h3 {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.eventos-scroll-container {
+  padding-left: 2rem;
+  margin-left: -2rem;
+  width: calc(100% + 9.1rem);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #fff #141e30;
+}
+
 .eventos-list {
   display: flex;
   flex-direction: row;
   gap: 24px;
   padding: 12px 0;
-  overflow-x: auto;
-  overflow: visible !important;
+
+  min-width: min-content;
 }
 
 .app-evento-card, .evento-card {
@@ -324,4 +343,9 @@
   background: #222;
   color: #fff;
   box-shadow: 0 0 8px 2px #fff4;
+}
+
+.proximos-eventos-title {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }

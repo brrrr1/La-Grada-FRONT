@@ -78,12 +78,14 @@
     </div>
   </div>
   <div class="proximos-eventos">
-    <h3>Próximos eventos</h3>
+    <h3 class="proximos-eventos-title">Próximos eventos</h3>
     <div *ngIf="eventosLoading">Cargando eventos...</div>
     <div *ngIf="eventosError" class="error">{{ eventosError }}</div>
     <div *ngIf="!eventosLoading && !eventosError && eventos.length === 0">No hay próximos eventos.</div>
-    <div class="eventos-list" *ngIf="eventos.length > 0">
-      <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
+    <div class="eventos-scroll-container" *ngIf="eventos.length > 0">
+      <div class="eventos-list">
+        <app-evento-card *ngFor="let evento of eventos" [evento]="evento"></app-evento-card>
+      </div>
     </div>
   </div>
 </div>
