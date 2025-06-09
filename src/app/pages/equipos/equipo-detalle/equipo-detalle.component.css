@@ -48,6 +48,7 @@
   position: relative;
   z-index: 1;
   padding-bottom: 5rem;
+  padding-top: 3rem;
 }
 .escudo-col {
   flex: 0 0 220px;
