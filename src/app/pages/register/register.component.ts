@@ -25,9 +25,19 @@ export class RegisterComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, private equipoService: EquipoService) {}
 
   ngOnInit() {
-    this.equipoService.getEquipos().subscribe(equipos => {
-      this.equipos = equipos;
+    this.equipoService.getEquipos().subscribe({
+      next: (equipos) => {
+        this.equipos = equipos;
+      },
+      error: (err) => {
+        console.error('Error al cargar equipos:', err);
+      }
     });
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   }
 
   async onSubmit() {
@@ -35,12 +45,23 @@ export class RegisterComponent implements OnInit {
     this.errorMsg = '';
     this.successMsg = '';
     let errors: string[] = [];
+
+    if (!this.isValidEmail(this.correo)) {
+      errors.push('El formato del correo electrónico no es válido');
+    }
+
     if (this.password !== this.verifyPassword) {
       errors.push('Las contraseñas no coinciden');
     }
     if (!this.nombre || this.nombre.trim() === '') {
       errors.push('El nombre es obligatorio');
     }
+
+    if (errors.length > 0) {
+      this.errorList = errors;
+      return;
+    }
+
     this.loading = true;
     let usernameExists = false;
     let emailExists = false;
