@@ -16,7 +16,10 @@ interface EventoCard extends Evento {
 @Component({
   selector: 'app-equipo-detalle',
   templateUrl: './equipo-detalle.component.html',
-  styleUrls: ['./equipo-detalle.component.css']
+  styleUrls: ['./equipo-detalle.component.css'],
+  host: {
+    '[class.admin]': 'esAdmin'
+  }
 })
 export class EquipoDetalleComponent implements OnInit {
   equipo: Equipo | null = null;

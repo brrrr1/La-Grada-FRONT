@@ -50,6 +50,11 @@
   padding-bottom: 5rem;
   padding-top: 3rem;
 }
+
+:host-context(.admin) .equipo-detalle-content {
+  padding-top: 0.25rem;
+}
+
 .escudo-col {
   flex: 0 0 220px;
   display: flex;
