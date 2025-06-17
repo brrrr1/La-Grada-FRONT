@@ -15,7 +15,7 @@ El frontend de *La Grada* es una aplicación web desarrollada con Angular que pr
 
 1. Clonar el repositorio:
 ```sh
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/brrrr1/La-Grada-FRONT
 cd lagrada
 ```
 
@@ -26,7 +26,7 @@ npm install
 
 3. Iniciar la aplicación:
 ```sh
-npm start
+ng serve
 ```
 
 La aplicación se ejecutará en `http://localhost:4200`.
