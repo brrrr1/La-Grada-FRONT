@@ -209,6 +209,17 @@
   background: #bdbdbd;
 }
 
+.login-message {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #f44336;
+  background: rgba(244, 67, 54, 0.1);
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
 .compra-msg {
   margin-top: 1rem;
   font-size: 1.1rem;

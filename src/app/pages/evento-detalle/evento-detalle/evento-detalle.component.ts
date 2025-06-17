@@ -197,4 +197,21 @@ export class EventoDetalleComponent implements OnInit {
       this.router.navigate(['/historial']);
     }
   }
+
+  irALogin() {
+    this.router.navigate(['/login']);
+  }
+
+  handleButtonClick() {
+    if (!this.isLoggedIn) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    
+    if (this.yaTieneEntrada) {
+      this.irAEntradas();
+    } else {
+      this.intentarComprarEntrada();
+    }
+  }
 }

@@ -38,8 +38,8 @@
       </div>
       <button class="shadow__btn" 
               [class.disabled]="!isLoggedIn || yaTieneEntrada || (!yaTieneEntrada && (evento.entradasRestantes <= 0 || comprando))"
-              [disabled]="!isLoggedIn || (!yaTieneEntrada && (evento.entradasRestantes <= 0 || comprando))" 
-              (click)="yaTieneEntrada ? irAEntradas() : intentarComprarEntrada()">
+              [disabled]="!yaTieneEntrada && (evento.entradasRestantes <= 0 || comprando)" 
+              (click)="handleButtonClick()">
         <ng-container *ngIf="yaTieneEntrada">Ya tienes entrada</ng-container>
         <ng-container *ngIf="!yaTieneEntrada">
           <ng-container *ngIf="evento.entradasRestantes <= 0">Entradas agotadas</ng-container>
@@ -49,6 +49,9 @@
           </ng-container>
         </ng-container>
       </button>
+      <div *ngIf="!isLoggedIn" class="login-message">
+        Debes iniciar sesión para comprar entradas
+      </div>
     </div>
   </div>
 </div>
