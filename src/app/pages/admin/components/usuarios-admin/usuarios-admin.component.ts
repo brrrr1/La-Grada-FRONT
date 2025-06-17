@@ -93,12 +93,12 @@ export class UsuariosAdminComponent implements OnInit {
         this.notificationType = 'success';
         setTimeout(() => this.showNotification = false, 3000);
       },
-      error: () => {
+      error: (error) => {
         this.showDisableModal = false;
         this.disableMode = false;
         this.usuarioSeleccionado = null;
         this.showNotification = true;
-        this.notificationMessage = 'Error al deshabilitar el usuario';
+        this.notificationMessage = error.error?.message || 'Error al deshabilitar el usuario';
         this.notificationType = 'error';
         setTimeout(() => this.showNotification = false, 3000);
       }
