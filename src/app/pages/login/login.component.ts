@@ -32,7 +32,14 @@ export class LoginComponent {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMsg = err.error?.message || 'Usuario o contraseña incorrectos';
+        console.log('Error response:', err);
+        if (err.error?.message) {
+          this.errorMsg = err.error.message;
+        } else if (err.error?.detail === 'Bad credentials') {
+          this.errorMsg = 'Usuario o contraseña incorrectos';
+        } else {
+          this.errorMsg = 'Error al iniciar sesión';
+        }
       }
     });
   }
