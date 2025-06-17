@@ -1,27 +1,78 @@
-# Lagrada
+# La Grada - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+![logo](https://github.com/user-attachments/assets/b804a08e-2e1e-4287-86fa-8e61bd1aa78e)
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+El frontend de *La Grada* es una aplicación web desarrollada con Angular que proporciona una interfaz moderna y funcional para la gestión y visualización de eventos deportivos en un bar dedicado a la visualización de estos eventos. Permite a los usuarios registrarse, seleccionar su equipo favorito, comprar entradas y gestionar su perfil de usuario. La aplicación ofrece una experiencia inmersiva para los amantes del deporte, con un diseño intuitivo y responsivo.
 
-## Code scaffolding
+## Requisitos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Node.js (versión recomendada: la más reciente LTS)
+- npm (incluido con Node.js)
 
-## Build
+## Instalación
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clonar el repositorio:
+```sh
+git clone [URL_DEL_REPOSITORIO]
+cd lagrada
+```
 
-## Running unit tests
+2. Instalar dependencias:
+```sh
+npm install
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+3. Iniciar la aplicación:
+```sh
+npm start
+```
 
-## Running end-to-end tests
+La aplicación se ejecutará en `http://localhost:4200`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Estructura del Proyecto
 
-## Further help
+```
+lagrada/
+├── src/
+│   ├── app/          # Componentes principales de la aplicación
+│   ├── components/   # Componentes reutilizables
+│   ├── pages/        # Páginas principales
+│   ├── assets/       # Recursos estáticos
+│   └── environments/ # Configuraciones de entorno
+├── scripts/          # Scripts de utilidad
+└── public/           # Archivos públicos
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Tecnologías Principales
+
+- Angular 18.2.0
+- Angular Material 18.2.14
+- TypeScript 5.5.2
+- RxJS 7.8.0
+- JWT Decode 4.0.0
+
+## Funcionalidades Principales
+
+### Funcionalidades sin autenticación
+- Registro de usuario
+- Inicio de sesión
+- Visualización de próximos eventos
+- Visualización de eventos por equipo
+- Consulta de detalles de equipos
+- Verificación de disponibilidad de username y email
+
+### Funcionalidades para usuarios autenticados
+- Gestión de perfil de usuario
+- Selección y cambio de equipo favorito
+- Compra de entradas
+- Visualización de eventos futuros
+- Historial de eventos asistidos
+- Gestión de entradas con QR
+
+### Funcionalidades para administradores
+- Gestión de equipos
+- Gestión de eventos
+- Administración de usuarios
+- Gestión de archivos
