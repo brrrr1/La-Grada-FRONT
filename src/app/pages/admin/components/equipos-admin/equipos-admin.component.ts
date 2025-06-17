@@ -142,7 +142,11 @@ export class EquiposAdminComponent implements OnInit {
           this.error = 'Error al actualizar el equipo';
           console.error('Error:', error);
           this.showNotification = true;
-          this.notificationMessage = 'Error al actualizar el equipo';
+          if (error.status === 413) {
+            this.notificationMessage = 'El tamaño de las imágenes es demasiado grande. Por favor, reduce el tamaño de las imágenes.';
+          } else {
+            this.notificationMessage = 'Error al actualizar el equipo';
+          }
           this.notificationType = 'error';
           setTimeout(() => {
             this.showNotification = false;
@@ -186,7 +190,11 @@ export class EquiposAdminComponent implements OnInit {
           this.error = 'Error al crear el equipo';
           console.error('Error:', error);
           this.showNotification = true;
-          this.notificationMessage = 'Error al crear el equipo';
+          if (error.status === 413) {
+            this.notificationMessage = 'El tamaño de las imágenes es demasiado grande. Por favor, reduce el tamaño de las imágenes.';
+          } else {
+            this.notificationMessage = 'Error al crear el equipo';
+          }
           this.notificationType = 'error';
           setTimeout(() => {
             this.showNotification = false;

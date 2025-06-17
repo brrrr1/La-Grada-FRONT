@@ -197,6 +197,18 @@
   box-shadow: none;
 }
 
+.shadow__btn.disabled {
+  background: #bdbdbd;
+  color: #eee;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.shadow__btn.disabled:hover {
+  box-shadow: none;
+  background: #bdbdbd;
+}
+
 .compra-msg {
   margin-top: 1rem;
   font-size: 1.1rem;

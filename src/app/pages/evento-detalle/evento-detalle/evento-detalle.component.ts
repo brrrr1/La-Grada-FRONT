@@ -182,4 +182,19 @@ export class EventoDetalleComponent implements OnInit {
       window.open(`https://www.youtube.com/results?search_query=${searchQuery}`, '_blank');
     }
   }
+
+  esEventoFuturo(): boolean {
+    if (!this.evento) return false;
+    const fechaEvento = new Date(this.evento.fechaYHora);
+    const ahora = new Date();
+    return fechaEvento > ahora;
+  }
+
+  irAEntradas() {
+    if (this.esEventoFuturo()) {
+      this.router.navigate(['/entradas']);
+    } else {
+      this.router.navigate(['/historial']);
+    }
+  }
 }

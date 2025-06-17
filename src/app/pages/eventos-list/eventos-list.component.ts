@@ -48,6 +48,13 @@ export class EventosListComponent implements OnInit {
     });
   }
 
+  private normalizarTexto(texto: string): string {
+    return texto
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
   ngOnInit() {
     this.aplicarFiltros();
   }
@@ -64,32 +71,35 @@ export class EventosListComponent implements OnInit {
   aplicarFiltros() {
     this.loading = true;
     let obs;
+    const nombreEquipoNormalizado = this.nombreEquipo ? this.normalizarTexto(this.nombreEquipo) : '';
+    const nombreEventoNormalizado = this.nombreEvento ? this.normalizarTexto(this.nombreEvento) : '';
+    
     switch (this.activeTab) {
       case 'cotidianos':
         obs = this.eventoService.getProximosEventosCotidianos(
-          this.nombreEquipo,
-          this.nombreEvento,
+          nombreEquipoNormalizado,
+          nombreEventoNormalizado,
           this.tieneEntradasDisponibles
         );
         break;
       case 'importantes':
         obs = this.eventoService.getProximosEventosImportantes(
-          this.nombreEquipo,
-          this.nombreEvento,
+          nombreEquipoNormalizado,
+          nombreEventoNormalizado,
           this.tieneEntradasDisponibles
         );
         break;
       case 'finales':
         obs = this.eventoService.getProximosEventosFinales(
-          this.nombreEquipo,
-          this.nombreEvento,
+          nombreEquipoNormalizado,
+          nombreEventoNormalizado,
           this.tieneEntradasDisponibles
         );
         break;
       default:
         obs = this.eventoService.getProximosEventosAll(
-          this.nombreEquipo,
-          this.nombreEvento,
+          nombreEquipoNormalizado,
+          nombreEventoNormalizado,
           this.tieneEntradasDisponibles
         );
     }
