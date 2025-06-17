@@ -76,3 +76,15 @@ lagrada/
 - Gestión de eventos
 - Administración de usuarios
 - Gestión de archivos
+
+## Usuarios de ejemplo
+admin admin (ADMIN)
+cr7 cr7 (USER)
+
+Se recomienda crear un usuario para probar el envío de emails.
+
+## Documentación
+Enlace:https://docs.google.com/document/d/1MkGBZOaepc4jdsV4TH6qsEaVp0Mq45F3xwEbGwDzA08/edit?usp=sharing
+
+## Presentación
+Enlace: https://docs.google.com/presentation/d/1TBbe6J2-Z6oKHqHPN0k1oNSz0P3087SVS5fF-QXTfN0/edit?usp=sharing
